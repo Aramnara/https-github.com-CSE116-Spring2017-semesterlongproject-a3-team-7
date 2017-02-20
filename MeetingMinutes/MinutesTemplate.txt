@@ -1,4 +1,4 @@
-Meeting Minutes for _______________:
+Meeting Minutes for _________02/20/17______:
 
 Meeting Attendance:
   *Zhen
@@ -6,7 +6,7 @@ Meeting Attendance:
   *Jae
 
 Tasks completed since last meeting:
-  *Meet up Schedule
+  *start code of project
   *
 
 Tasks started, but not completed, since last meeting:
@@ -19,4 +19,4 @@ Tasks to be worked on (and by which team members) for the next meeting:
 
 Schedule for the next week's set of pair programming meetings:
   * Every Saturday
-  *
+  *Planned to meet multiple times this week in library
