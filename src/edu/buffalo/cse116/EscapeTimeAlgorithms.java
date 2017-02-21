@@ -63,5 +63,20 @@ public class EscapeTimeAlgorithms {
 		}
 		_escapeTime = _passes;	
 	}
+		public void MultibrotSet(double xCalc, double yCalc) {
+			_xCalc = xCalc;
+			_yCalc = yCalc;
+			_dist = Math.sqrt((_xCalc*_xCalc) + (_yCalc* _yCalc));
+			_passes = 0;
+			while (_dist<= 2 && _passes < 255) {
+				_xCalc = (_xCalc*_xCalc*_xCalc) - (3*_xCalc*_yCalc*_yCalc) + xCalc;
+				_yCalc = (3*_xCalc*_xCalc*_yCalc) - (_yCalc*_yCalc*_yCalc) + yCalc;
+				_passes = _passes + 1;
+				_dist = Math.sqrt((_xCalc*_xCalc) + (_yCalc* _yCalc));
+				
+			}
+			_escapeTime = _passes;
+		}
+	}
 	
-}
+
