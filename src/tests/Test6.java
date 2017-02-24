@@ -24,5 +24,7 @@ public class Test6 {
 		
 		Mandelbrot mandelbrot = new Mandelbrot();
 		assertEquals(testArray.length, mandelbrot.finalFractal().length, 0.001);
+		
+		
 	}
 }

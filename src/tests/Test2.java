@@ -28,4 +28,5 @@ public class Test2 {
 		assertEquals(0.117, yTest[279], 0.01);
 		assertEquals(1.29, yTest[511], 0.01);
 	}
+	
 }
