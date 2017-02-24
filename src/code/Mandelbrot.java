@@ -35,8 +35,9 @@ public class Mandelbrot {
 		int passes = 0;
 		int escapeTime = 0;
 		while (dist <= 2 && passes < 225) {
+			double xTemp = xCalc;
 			xCalc = (xCalc * xCalc) - (yCalc * yCalc) + currentX;
-			yCalc = 2 * xCalc * yCalc + currentY;
+			yCalc = 2 * xTemp * yCalc + currentY;
 			passes += 1;
 			dist = Math.sqrt((xCalc * xCalc) + (yCalc * yCalc));
 		}
