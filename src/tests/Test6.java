@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import code.Julia;
 import code.Mandelbrot;
 
 /**
@@ -19,12 +20,16 @@ public class Test6 {
 	 * expecting to return a 2d-array with 512 rows and 512 columns.
 	 */
 	@Test
-	public void Test() {
+	public void Test1() {
 		int[][] testArray = new int[512][512];
 		
 		Mandelbrot mandelbrot = new Mandelbrot();
 		assertEquals(testArray.length, mandelbrot.finalFractal().length, 0.001);
-		
-		
+	}
+	@Test
+	public void Test2() {
+		int[][] testArray = new int[512][512];
+		Julia julia = new Julia();
+		assertEquals(testArray.length, julia.finalFractal().length, 0.001);
 	}
 }

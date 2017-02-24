@@ -18,10 +18,10 @@ public class Julia {
 		double dist = Math.sqrt((xCalc * xCalc) + (yCalc * yCalc));
 		int passes = 0;
 		int escapeTime = 0;
-		while (dist <= 2 && passes < 255) {
+		while (dist <= 2 && passes < 225) {
 			double xTemp = xCalc;
-			xCalc = (xCalc * xCalc) - (yCalc * yCalc) + currentX;
-			yCalc = 2 * xTemp * yCalc + currentY;
+			xCalc = (xCalc * xCalc) - (yCalc * yCalc) + -0.72689;
+			yCalc = 2 * xTemp * yCalc + 0.188887;
 			passes += 1;
 			dist = Math.sqrt((xCalc * xCalc) + (yCalc * yCalc));
 		}

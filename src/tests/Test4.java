@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import code.Julia;
 import code.Mandelbrot;
 
 /**
@@ -24,5 +25,10 @@ public class Test4 {
 	public void MandelbrotSetTest() {
 		Mandelbrot mandelbrot = new Mandelbrot();
 		assertEquals(1 ,mandelbrot.calcEscapeTime(0.5946289062500001, 1.2949218750000122));
+	}
+	@Test
+	public void JuliaSetTest() {
+		Julia julia = new Julia();
+		assertEquals(1, julia.calcEscapeTime(1.6933593749999853, 0.9765625));
 	}
 }
