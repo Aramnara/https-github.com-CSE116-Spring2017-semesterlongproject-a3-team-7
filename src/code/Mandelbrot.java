@@ -1,12 +1,33 @@
 package code;
 
+/** 
+ * This class contains all the methods needed for Mandelbrot set
+ * which would return a 2d-Array fractal.
+ *   
+ * @author Zhenduo Lin
+ */
 public class Mandelbrot {
 	
+	/** 
+	 * This method returns a 2d-Array of type int
+	 *  with 512 rows and 512 columns
+	 *  which would be the fractal that we will be working on.
+	 * 
+	 * @return a 2d-Array on int.
+	 */
 	public int[][] fractal() {
 		int[][] pixel = new int[512][512];
 		return pixel;
 	}
 	
+	/**
+	 * This method calculates the escape time of the given coordinates
+	 * according to the formula given by Escape-time algorithms.
+	 * 
+	 * @param currentX = the current x-coordinate that we will be using.
+	 * @param currentY = the current y-coordinate that we will be using.
+	 * @return an escape time of type int.
+	 */
 	public int calcEscapeTime(double currentX, double currentY) {
 		double xCalc = currentX;
 		double yCalc = currentY;
@@ -23,37 +44,83 @@ public class Mandelbrot {
 		return escapeTime;
 	}
 	
+	/**
+	 * This method records all the x-coordinates used in the Mandelbrot Set.
+	 * 
+	 * @return an array of type double containing all the x-coordinates in the fractal.
+	 */
+	public double[] xCoordinate() {
+		double[] xSet = new double[512];
+		int rows = 0;
+		for (double x=-2.15; x<=0.6; x+=2.75/512) {
+			xSet[rows] = x;
+			rows = rowsAdd(rows);
+		}
+		return xSet;
+	}
+	
+	/**
+	 * This method records all the y-coordinates used in the Mandelbrot Set.
+	 * 
+	 * @return an array of type double containing all the y-coordinates in the fractal.
+	 */
+	public double[] yCoordinate() {
+		double[] ySet = new double[512];
+		int rows = 0;
+		for (double y=-1.3; y<=1.3; y+=2.6/512) {
+			ySet[rows] = y;
+			rows = rowsAdd(rows);
+		}
+		return ySet;
+	}
+	
+	/**
+	 * This method depicts the final 2d-array of the fractal
+	 * within certain range and filled with escape time.
+	 * 
+	 * @return a 2d-array of fractal.
+	 */
 	public int[][] finalFractal() {
-		double x;
-		double xMax = 0.6;
-		double y;
-		double yMax = 1.3;
 		int rows = 0;
 		int cols = 0;
 		int[][] pixel = fractal();
-		for (x=-2.15; x<xMax; x+=2.75/512) {
-			for (y=-1.3; y<yMax; y+=2.6/512) {
+		for (double x=-2.15; x<=0.6; x+=2.75/512) {
+			for (double y=-1.3; y<=1.3; y+=2.6/512) {
 				pixel[rows][cols] = calcEscapeTime(x, y);
-				colsAdd(cols);
+				cols = colsAdd(cols);
 			}
-			rowsAdd(rows);
+			rows = rowsAdd(rows);
 		}
 		return pixel;
 	}
 	
+	/**
+	 * This method allows to increase the current row(index) in the 2d-array by 1
+	 * without exceeding the range.
+	 * 
+	 * @param targetRow = target row for increase.
+	 * @return a row of type int.
+	 */
 	public int rowsAdd(int targetRow) {
 		int rows = targetRow;
-		if (rows < 512) {
-			rows += 1;
+		if (rows < 511) {
+			return rows += 1;
 		} else {
 			rows = 0;
 		}
 		return rows;
 	}
 	
+	/**
+	 * This method allows to increase the current column(index) in the 2d-array by 1
+	 * without exceeding the range.
+	 * 
+	 * @param targetCol = target column for increase.
+	 * @return a column of type int.
+	 */
 	public int colsAdd(int targetCol) {
 		int cols = targetCol;
-		if (cols < 512) {
+		if (cols < 511) {
 			cols += 1;
 		} else {
 			cols = 0;
