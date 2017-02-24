@@ -127,5 +127,4 @@ public class Mandelbrot {
 		}
 		return cols;
 	}
-	
 }

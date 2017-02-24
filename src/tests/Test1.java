@@ -28,5 +28,4 @@ public class Test1 {
 		assertEquals(-1.613, xTest[100], 0.01);
 		assertEquals(0.6, xTest[511], 0.01);
 	}
-
 }
