@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import code.Julia;
 import code.Mandelbrot;
 
 /**
@@ -27,6 +28,15 @@ public class Test2 {
 		assertEquals(-1.28, yTest[4], 0.01);
 		assertEquals(0.117, yTest[279], 0.01);
 		assertEquals(1.29, yTest[511], 0.01);
+	}
+	@Test
+	public void JuiliSetTest() {
+		Julia julia = new Julia();
+		double[] yTest = julia.yCoordinate();
+		assertEquals(-.972, yTest[7], 0.01);
+		assertEquals(-.929, yTest[18], 0.01);
+		assertEquals(.355, yTest[347], 0.01);
+		assertEquals(.972, yTest[505], 0.01);
 	}
 	
 }

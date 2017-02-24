@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import code.BurningShip;
+import code.Julia;
 import code.Mandelbrot;
 
 /**
@@ -36,5 +37,10 @@ public class Test3 {
 	public void BurningShipSetTest() {
 		BurningShip burningship = new BurningShip();
 		assertEquals(225, burningship.calcEscapeTime(-1.7443359374999874, -0.017451171875000338));
+	}
+	@Test
+	public void JuliaSetTest() {
+		Julia julia = new Julia();
+		assertEquals(225, julia.calcEscapeTime(1.0492187499999897, -0.234375));
 	}
 }
