@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import code.BurningShip;
 import code.Julia;
 import code.Mandelbrot;
 
@@ -12,6 +13,7 @@ import code.Mandelbrot;
  * the returns of fractals to be 2d-array with 512 rows and 512 columns.
  * 
  * @author Zhenduo Lin
+ * @author Anthony Ramnarain
  */
 public class Test6 {
 	
@@ -25,11 +27,12 @@ public class Test6 {
 		
 		Mandelbrot mandelbrot = new Mandelbrot();
 		assertEquals(testArray.length, mandelbrot.finalFractal().length, 0.001);
-	}
-	@Test
-	public void Test2() {
-		int[][] testArray = new int[512][512];
+		
 		Julia julia = new Julia();
 		assertEquals(testArray.length, julia.finalFractal().length, 0.001);
+		
+		BurningShip burningship = new BurningShip();
+		assertEquals(testArray.length, burningship.finalFractal().length, 0.001);
 	}
+
 }

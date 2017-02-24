@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import code.BurningShip;
 import code.Julia;
 import code.Mandelbrot;
 
@@ -12,6 +13,7 @@ import code.Mandelbrot;
  * the y-coordinates in each fractal row.
  * 
  * @author Zhenduo Lin
+ * @author Anthony Ramnarain
  */
 public class Test2 {
 	
@@ -29,8 +31,14 @@ public class Test2 {
 		assertEquals(0.117, yTest[279], 0.01);
 		assertEquals(1.29, yTest[511], 0.01);
 	}
+	
+	/**
+	 * This JUnit test is testing the translation
+	 * between pixel's column and the corresponding y-coordinate
+	 * for the Julia Set.
+	 */
 	@Test
-	public void JuiliSetTest() {
+	public void JuilaSetTest() {
 		Julia julia = new Julia();
 		double[] yTest = julia.yCoordinate();
 		assertEquals(-.972, yTest[7], 0.01);
@@ -39,4 +47,18 @@ public class Test2 {
 		assertEquals(.972, yTest[505], 0.01);
 	}
 	
+	/**
+	 * This JUnit test is testing the translation
+	 * between pixel's column and the corresponding y-coordinate
+	 * for the Burning Ship Set.
+	 */
+	@Test
+	public void BurningShipSetTest() {
+		BurningShip burningship = new BurningShip();
+		double[] yTest = burningship.yCoordinate();
+		assertEquals(-0.078, yTest[10], 0.01);
+		assertEquals(-0.06, yTest[99], 0.01);
+		assertEquals(-0.039, yTest[200], 0.01);
+		assertEquals(0.012, yTest[451], 0.01);
+	}
 }
