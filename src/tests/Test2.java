@@ -63,13 +63,15 @@ public class Test2 {
 		assertEquals(-0.039, yTest[200], 0.01);
 		assertEquals(0.012, yTest[451], 0.01);
 	}
+	
 	@Test
 	public void MultibrotSetTest() {
 		Multibrot multibrot = new Multibrot();
 		double[] yTest = multibrot.yCoordinate();
-		assertEquals(-1.3, yTest[], 0.01);
-		assertEquals(-1.28, yTest[], 0.01);
-		assertEquals(0.117, yTest[], 0.01);
-		assertEquals(1.29, yTest[], 0.01);
-}
+		assertEquals(-1.3, yTest[0], 0.01);
+		assertEquals(-1.27, yTest[5], 0.01);
+		assertEquals(-0.72, yTest[115], 0.01);
+		assertEquals(0.45, yTest[345], 0.01);
+	}
+	
 }

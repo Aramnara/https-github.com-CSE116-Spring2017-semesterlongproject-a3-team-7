@@ -39,12 +39,17 @@ public class Test4 {
 	public void JuliaSetTest() {
 		Julia julia = new Julia();
 		assertEquals(1, julia.calcEscapeTime(1.6933593749999853, 0.9765625));
-		
 	}
+	
+	/**
+	 * This JUnit test testing the escape time for a coordinate
+	 * whose distance from the origin exceeds the escape distance after a single loop pass
+	 * for the Multibrot Set.
+	 */
 	@Test
-	public void MultibrotSetTest(){
+	public void MultibrotSetTest(){		
 		Multibrot multibrot = new Multibrot();
-		assertEquals(1, multibrot.calcEscapeTime(, ));
+		assertEquals(1, multibrot.calcEscapeTime(0.9921875, 1.05625));	
 	}
 
 }

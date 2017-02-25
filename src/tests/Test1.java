@@ -50,7 +50,7 @@ public class Test1 {
 	}
 	
 	/**
-	 * This Junit test is testing the translation
+	 * This JUnit test is testing the translation
 	 * between pixel's row and the corresponding x-coordinate
 	 * for the Burning Ship Set.
 	 */
@@ -63,14 +63,20 @@ public class Test1 {
 		assertEquals(-1.75, xTest[265], 0.01);
 		assertEquals(-1.7, xTest[511], 0.01);
 	}
+	
+	/**
+	 * This JUnit test is testing the translation
+	 * between pixel's row and the corresponding x-coordinate
+	 * for the Multibrot Set.
+	 */
 	@Test
 	public void MultibrotSetTest() {
 		Multibrot multibrot = new Multibrot();
 		double[] xTest = multibrot.xCoordinate();
-		assertEquals(-1, xTest[0], 0.01);
-		assertEquals(-0.996, xTest[],0.01);
-		assertEquals(-0.992, xTest[],0.01);
-		assertEquals(-0.988, XTest[],0.01);
-		
+		assertEquals(-0.99, xTest[3], 0.01);
+		assertEquals(-0.98, xTest[4], 0.01);
+		assertEquals(0.99, xTest[510], 0.01);
+		assertEquals(1.0, xTest[511], 0.01);
 	}
+		
 }

@@ -1,11 +1,11 @@
 package code;
+
 /**
  * This class contains all the methods needed for Julia set
  * which would return a 2d-Array fractal.
  * 
  * @author Anthony Ramnarain
  */
-
 public class Julia {
 
 	/** 
