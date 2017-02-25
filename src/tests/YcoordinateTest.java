@@ -17,7 +17,7 @@ import code.Multibrot;
  * @author Anthony Ramnarain
  * @author JaeHoon Oh
  */
-public class Test2 {
+public class YcoordinateTest {
 	
 	/**
 	 * This JUnit test is testing the translation

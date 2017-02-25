@@ -17,7 +17,7 @@ import code.Multibrot;
  * @author Anthony Ramnarain
  * @author Jae Hoon Oh
  */
-public class Test6 {
+public class FractalTest {
 	
 	/**
 	 * This JUnit test method testing all four fractals

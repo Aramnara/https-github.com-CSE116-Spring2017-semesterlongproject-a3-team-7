@@ -14,7 +14,7 @@ import code.BurningShip;
  * 
  * @author Zhenduo Lin
  */
-public class Test5 {
+public class BurningShipEscapeTimeTest {
 
 	/**
 	 * This JUnit test testing that

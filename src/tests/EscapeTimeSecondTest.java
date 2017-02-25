@@ -17,7 +17,7 @@ import code.Multibrot;
  * @author Anthony Ramnarain
  * @author Jae Hoon Oh
  */
-public class Test4 {
+public class EscapeTimeSecondTest {
 	
 	/**
 	 * This JUnit test testing the escape time for a coordinate
