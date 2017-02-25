@@ -7,6 +7,7 @@ import org.junit.Test;
 import code.BurningShip;
 import code.Julia;
 import code.Mandelbrot;
+import code.Multibrot;
 
 /**
  * This class contains JUnit tests which testing
@@ -14,6 +15,7 @@ import code.Mandelbrot;
  * 
  * @author Zhenduo Lin
  * @author Anthony Ramnarain
+ * @author Jae Hoon Oh
  */
 public class Test1 {
 	
@@ -60,5 +62,15 @@ public class Test1 {
 		assertEquals(-1.79, xTest[68], 0.01);
 		assertEquals(-1.75, xTest[265], 0.01);
 		assertEquals(-1.7, xTest[511], 0.01);
+	}
+	@Test
+	public void MultibrotSetTest() {
+		Multibrot multibrot = new Multibrot();
+		double[] xTest = multibrot.xCoordinate();
+		assertEquals(-1, xTest[0], 0.01);
+		assertEquals(-0.996, xTest[],0.01);
+		assertEquals(-0.992, xTest[],0.01);
+		assertEquals(-0.988, XTest[],0.01);
+		
 	}
 }

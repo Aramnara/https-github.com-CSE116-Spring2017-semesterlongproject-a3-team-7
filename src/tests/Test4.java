@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import code.Julia;
 import code.Mandelbrot;
+import code.Multibrot;
 
 /**
  * This class contains JUnit test that testing
@@ -14,6 +15,7 @@ import code.Mandelbrot;
  * 
  * @author Zhenduo Lin
  * @author Anthony Ramnarain
+ * @author Jae Hoon Oh
  */
 public class Test4 {
 	
@@ -37,6 +39,12 @@ public class Test4 {
 	public void JuliaSetTest() {
 		Julia julia = new Julia();
 		assertEquals(1, julia.calcEscapeTime(1.6933593749999853, 0.9765625));
+		
+	}
+	@Test
+	public void MultibrotSetTest(){
+		Multibrot multibrot = new Multibrot();
+		assertEquals(1, multibrot.calcEscapeTime(, ));
 	}
 
 }

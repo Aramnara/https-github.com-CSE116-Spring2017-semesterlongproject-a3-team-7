@@ -7,6 +7,7 @@ import org.junit.Test;
 import code.BurningShip;
 import code.Julia;
 import code.Mandelbrot;
+import code.Multibrot;
 
 /**
  * This class contains JUnit test that testing the
@@ -15,6 +16,7 @@ import code.Mandelbrot;
  * 
  * @author Zhenduo Lin
  * @author Anthony Ramnarain
+ * @author JaeHoon Oh
  */
 public class Test3 {
 	
@@ -48,5 +50,12 @@ public class Test3 {
 	public void BurningShipSetTest() {
 		BurningShip burningship = new BurningShip();
 		assertEquals(225, burningship.calcEscapeTime(-1.7443359374999874, -0.017451171875000338));
+	}
+	@Test
+	public void MultibrotSetTest() {
+		Multibrot multibrot = new Multibrot();
+		assertEquals(225, multibrot.calcEscapeTime(, ));
+		
+	}
 	}
 }
