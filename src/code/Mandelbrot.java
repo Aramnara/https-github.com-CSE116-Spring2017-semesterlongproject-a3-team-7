@@ -55,7 +55,7 @@ public class Mandelbrot {
 		int rows = 0;
 		for (double x=-2.15; x<=0.6; x+=2.75/512) {
 			xSet[rows] = x;
-			rows = rowsAdd(rows);
+			rows = add(rows);
 		}
 		return xSet;
 	}
@@ -70,7 +70,7 @@ public class Mandelbrot {
 		int rows = 0;
 		for (double y=-1.3; y<=1.3; y+=2.6/512) {
 			ySet[rows] = y;
-			rows = rowsAdd(rows);
+			rows = add(rows);
 		}
 		return ySet;
 	}
@@ -88,44 +88,28 @@ public class Mandelbrot {
 		for (double x=-2.15; x<=0.6; x+=2.75/512) {
 			for (double y=-1.3; y<=1.3; y+=2.6/512) {
 				pixel[rows][cols] = calcEscapeTime(x, y);
-				cols = colsAdd(cols);
+				cols = add(cols);
 			}
-			rows = rowsAdd(rows);
+			rows = add(rows);
 		}
 		return pixel;
 	}
 	
 	/**
-	 * This method allows to increase the current row(index) in the 2d-array by 1
-	 * without exceeding the range.
+	 * This method allows to increase the current integer by 1
+	 * without exceeding the range for the fractals.
 	 * 
-	 * @param targetRow = target row for increase.
-	 * @return a row of type int.
+	 * @param target = target for increase.
+	 * @return an integer of type int.
 	 */
-	public int rowsAdd(int targetRow) {
-		int rows = targetRow;
-		if (rows < 511) {
-			return rows += 1;
+	public int add(int target) {
+		int add = target;
+		if (add < 511) {
+			add += 1;
 		} else {
-			rows = 0;
+			add = 0;
 		}
-		return rows;
+		return add;
 	}
 	
-	/**
-	 * This method allows to increase the current column(index) in the 2d-array by 1
-	 * without exceeding the range.
-	 * 
-	 * @param targetCol = target column for increase.
-	 * @return a column of type int.
-	 */
-	public int colsAdd(int targetCol) {
-		int cols = targetCol;
-		if (cols < 511) {
-			cols += 1;
-		} else {
-			cols = 0;
-		}
-		return cols;
-	}
 }

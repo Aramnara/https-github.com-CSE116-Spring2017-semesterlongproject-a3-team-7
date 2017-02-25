@@ -73,9 +73,9 @@ public class Test1 {
 	public void MultibrotSetTest() {
 		Multibrot multibrot = new Multibrot();
 		double[] xTest = multibrot.xCoordinate();
-		assertEquals(-0.99, xTest[3], 0.01);
+		assertEquals(-1, xTest[0], 0.01);
 		assertEquals(-0.98, xTest[4], 0.01);
-		assertEquals(0.99, xTest[510], 0.01);
+		assertEquals(0.06, xTest[272], 0.01);
 		assertEquals(1.0, xTest[511], 0.01);
 	}
 		
