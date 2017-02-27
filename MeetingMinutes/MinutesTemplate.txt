@@ -1,4 +1,4 @@
-Meeting Minutes for _________02/20/17______:
+Meeting Minutes for _________02/27/17______:
 
 Meeting Attendance:
   *Zhen
@@ -6,15 +6,15 @@ Meeting Attendance:
   *Jae
 
 Tasks completed since last meeting:
-  *start code of project
+  *finish the phase #1 of the project
   *
 
 Tasks started, but not completed, since last meeting:
-  *Part 1
+  *everything is done
   *
 
 Tasks to be worked on (and by which team members) for the next meeting:
-  *Part 1 (parts divided equally)
+  *start the phase #2
   *
 
 Schedule for the next week's set of pair programming meetings:
