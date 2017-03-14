@@ -122,32 +122,32 @@ public class GUI implements Runnable {
 	public void selectedColor() {
 		_colorMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createRainbowColorModel(256));
+				_fractalPanel.setIndexColorModel(_colorModelFactory.createRainbowColorModel(226));
 //				selectedFractal();
 			}
 		});
 		_colorMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createBluesColorModel(256));
+				_fractalPanel.setIndexColorModel(_colorModelFactory.createBluesColorModel(226));
 //				selectedFractal();
 			}
 		});
 		_colorMenuItem3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createGrayColorModel(256));
+				_fractalPanel.setIndexColorModel(_colorModelFactory.createGrayColorModel(226));
 //				selectedFractal();
 			}
 		});
 		_colorMenuItem4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createMyOwnColorModel(256));
+				_fractalPanel.setIndexColorModel(_colorModelFactory.createMyOwnColorModel(226));
 //				selectedFractal();
 			}
 		});
 	}
 	
 //	public IndexColorModel defaultColor() {
-//		return _colorModelFactory.createRainbowColorModel(256);
+//		return _colorModelFactory.createRainbowColorModel(226);
 //	}
 	
 	public void selectedFractal() {
