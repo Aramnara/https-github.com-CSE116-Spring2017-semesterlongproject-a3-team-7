@@ -81,16 +81,12 @@ public class Julia {
 	 * 
 	 * @return a 2d-array of fractal.
 	 */
-	public int[][]finalFractal () {
-		int rows = 0;
-		int cols = 0;
-		int [][] pixel = fractal();
-		for (double x=-1.7; x<1.7; x+=3.4/512) {
-			for (double y=-1.0; y<=1.0; y+=2.0/512) {
-				pixel[rows][cols] = calcEscapeTime(x,y);
-				cols = add(cols);
+	public int[][] finalFractal() {
+		int[][] pixel = fractal();
+		for (int rows=0; rows<512; rows+=1) {
+			for (int cols=0; cols<512; cols+=1) {
+				pixel[rows][cols] = calcEscapeTime(xCoordinate()[rows], yCoordinate()[cols]);
 			}
-			rows = add(rows);
 		}
 		return pixel;
 	}

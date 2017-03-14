@@ -82,15 +82,11 @@ public class BurningShip {
 	 * @return a 2d-array of fractal.
 	 */
 	public int[][] finalFractal() {
-		int rows = 0;
-		int cols = 0;
 		int[][] pixel = fractal();
-		for (double x=-1.8; x<=-1.7; x+=0.1/512) {
-			for (double y=-0.08; y<=0.025; y+=0.105/512) {
-				pixel[rows][cols] = calcEscapeTime(x, y);
-				cols = add(cols);
+		for (int rows=0; rows<512; rows+=1) {
+			for (int cols=0; cols<512; cols+=1) {
+				pixel[rows][cols] = calcEscapeTime(xCoordinate()[rows], yCoordinate()[cols]);
 			}
-			rows = add(rows);
 		}
 		return pixel;
 	}
@@ -111,4 +107,5 @@ public class BurningShip {
 		}
 		return add;
 	}
+	
 }
