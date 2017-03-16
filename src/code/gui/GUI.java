@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import code.BurningShip;
@@ -29,6 +30,8 @@ public class GUI implements Runnable {
 	private Multibrot _multibrot;
 	private ColorModelFactory _colorModelFactory;
 	private Model _model;
+	private JMenuItem _fileMenuItem1;
+	private JMenuItem _fileMenuItem2;
 	private JMenuItem _fractalMenuItem1;
 	private JMenuItem _fractalMenuItem2;
 	private JMenuItem _fractalMenuItem3;
@@ -62,8 +65,10 @@ public class GUI implements Runnable {
 		JMenu fractalMenu = new JMenu("Fractal");
 		JMenu colorMenu = new JMenu("Color");
 
-		JMenuItem fileMenuItem1 = new JMenuItem("Exit");
-		fileMenuItem1.setEnabled(true);
+		_fileMenuItem1 = new JMenuItem("Change Escape Distance");
+		_fileMenuItem1.setEnabled(true);
+		_fileMenuItem2 = new JMenuItem("Exit");
+		_fileMenuItem2.setEnabled(true);
 		_fractalMenuItem1 = new JMenuItem("Mandelbrot");
 		_fractalMenuItem1.setEnabled(true);
 		_fractalMenuItem2 = new JMenuItem("Julia");
@@ -78,13 +83,13 @@ public class GUI implements Runnable {
 		_colorMenuItem2.setEnabled(true);
 		_colorMenuItem3 = new JMenuItem("Grey");
 		_colorMenuItem3.setEnabled(true);
-		_colorMenuItem4 = new JMenuItem("Lightblue");
+		_colorMenuItem4 = new JMenuItem("Supreme Pink Golden Lightblue");
 		_colorMenuItem4.setEnabled(true);
 		
 		JMenuBar menuBar = new JMenuBar();
 		
-		fileMenuItem1.addActionListener(a);
-		fileMenuItem1.addActionListener(new ActionListener() {
+		_fileMenuItem2.addActionListener(a);
+		_fileMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
@@ -93,7 +98,8 @@ public class GUI implements Runnable {
 		selectedColor();
 		selectedFractal();
 		
-		fileMenu.add(fileMenuItem1);
+		fileMenu.add(_fileMenuItem1);
+		fileMenu.add(_fileMenuItem2);
 		fractalMenu.add(_fractalMenuItem1);
 		fractalMenu.add(_fractalMenuItem2);
 		fractalMenu.add(_fractalMenuItem3);
@@ -108,7 +114,7 @@ public class GUI implements Runnable {
 		_frame.setJMenuBar(menuBar);
 		
 		_model.addObserver(this);
-		update();
+//		update();
 		
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_frame.pack();
@@ -116,7 +122,25 @@ public class GUI implements Runnable {
 	}
 	
 	public void update() {
-
+		_fileMenuItem1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = 0;
+				while (i <= 0) {
+					String EscapeDistance = JOptionPane.showInputDialog("Please Enter Escape Distance");
+					if (EscapeDistance.length()>0) {
+						int escapeDistance = Integer.parseInt(EscapeDistance);
+						_mandelbrot.escapeDistance(escapeDistance);
+						_julia.escapeDistance(escapeDistance);
+						_burningShip.escapeDistance(escapeDistance);
+						_multibrot.escapeDistance(escapeDistance);
+						System.out.println("Success");
+						i += 1;
+					} else {
+						System.out.println("Please enter some number!");
+					}
+				}
+			}
+		});
 	}
 	
 	public void selectedColor() {
@@ -153,7 +177,6 @@ public class GUI implements Runnable {
 	public void selectedFractal() {
 		_fractalMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectedFractal();
 				_fractalPanel.updateImage(_mandelbrot.finalFractal());
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
@@ -162,7 +185,6 @@ public class GUI implements Runnable {
 		});
 		_fractalMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectedFractal();
 				_fractalPanel.updateImage(_julia.finalFractal());
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
@@ -171,7 +193,6 @@ public class GUI implements Runnable {
 		});
 		_fractalMenuItem3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectedFractal();
 				_fractalPanel.updateImage(_burningShip.finalFractal());
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
@@ -180,7 +201,6 @@ public class GUI implements Runnable {
 		});
 		_fractalMenuItem4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				selectedFractal();
 				_fractalPanel.updateImage(_multibrot.finalFractal());
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);

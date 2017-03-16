@@ -1,5 +1,7 @@
 package code;
 
+import java.security.InvalidParameterException;
+
 /**
  * This class contains all the methods needed for Julia set
  * which would return a 2d-Array fractal.
@@ -7,6 +9,8 @@ package code;
  * @author Anthony Ramnarain
  */
 public class Julia {
+	
+	private int _escapeDistance = 2; //Initial escape distance
 
 	/** 
 	 * This method returns a 2d-Array of type int
@@ -34,7 +38,7 @@ public class Julia {
 		double dist = Math.sqrt((xCalc * xCalc) + (yCalc * yCalc));
 		int passes = 0;
 		int escapeTime = 0;
-		while (dist <= 2 && passes < 225) {
+		while (dist <= _escapeDistance && passes < 225) {
 			double xTemp = xCalc;
 			xCalc = (xCalc * xCalc) - (yCalc * yCalc) + -0.72689;
 			yCalc = 2 * xTemp * yCalc + 0.188887;
@@ -108,4 +112,12 @@ public class Julia {
 		return add;
 	}
 	
+	public int escapeDistance(int escapeDistance) {
+		if (escapeDistance > 0) {
+			_escapeDistance = escapeDistance;	
+		} else {
+			throw new InvalidParameterException();
+		}
+		return _escapeDistance;
+	}
 }
