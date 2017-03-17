@@ -123,5 +123,4 @@ public class BurningShip {
 		} 
 		return _escapeDistance;
 	}
-	
 }

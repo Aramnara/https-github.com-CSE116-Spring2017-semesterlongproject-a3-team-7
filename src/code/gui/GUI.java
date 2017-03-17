@@ -230,5 +230,4 @@ public class GUI implements Runnable {
 			}
 		});
 	}
-	
 }

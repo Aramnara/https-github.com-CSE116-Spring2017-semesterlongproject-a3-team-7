@@ -78,5 +78,4 @@ public class XcoordinateTest {
 		assertEquals(0.06, xTest[272], 0.01);
 		assertEquals(1.0, xTest[511], 0.01);
 	}
-		
 }

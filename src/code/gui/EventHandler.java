@@ -29,5 +29,4 @@ public class EventHandler implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		_model.changeEscapeDistance();
 	}
-
 }

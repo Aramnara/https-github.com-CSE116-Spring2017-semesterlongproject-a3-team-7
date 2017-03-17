@@ -51,5 +51,4 @@ public class EscapeTimeSecondTest {
 		Multibrot multibrot = new Multibrot();
 		assertEquals(1, multibrot.calcEscapeTime(0.9921875, 1.05625));	
 	}
-
 }

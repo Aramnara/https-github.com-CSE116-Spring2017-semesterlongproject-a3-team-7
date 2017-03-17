@@ -128,5 +128,6 @@ public class Multibrot {
 		} 
 		return _escapeDistance;
 	}	
+	
 }
 	

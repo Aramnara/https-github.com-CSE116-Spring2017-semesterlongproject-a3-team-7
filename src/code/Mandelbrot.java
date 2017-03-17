@@ -127,4 +127,5 @@ public class Mandelbrot {
 		} 
 		return _escapeDistance;
 	}
+	
 }

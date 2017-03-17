@@ -73,5 +73,4 @@ public class YcoordinateTest {
 		assertEquals(-0.72, yTest[115], 0.01);
 		assertEquals(0.45, yTest[345], 0.01);
 	}
-	
 }

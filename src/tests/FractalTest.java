@@ -39,5 +39,4 @@ public class FractalTest {
 		Multibrot multibrot = new Multibrot();
 		assertEquals(testArray.length, multibrot.finalFractal().length, 0.001);
 	}
-
 }

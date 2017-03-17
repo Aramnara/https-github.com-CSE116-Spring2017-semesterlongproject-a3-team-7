@@ -33,4 +33,5 @@ public class BurningShipEscapeTimeTest {
 		assertFalse(set.contains(0));
 		assertFalse(set.contains(1));
 	}
+	
 }
