@@ -12,7 +12,6 @@ public class Model {
 	private GUI _observer; // instance variable of type class GUI
 	
 	public Model() {
-
 	}
 	
 	/**

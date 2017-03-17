@@ -123,4 +123,5 @@ public class Julia {
 		} 
 		return _escapeDistance;
 	}
+	
 }
