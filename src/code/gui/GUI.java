@@ -28,23 +28,23 @@ import edu.buffalo.fractal.FractalPanel;
  */
 public class GUI implements Runnable {
 	
-	private JFrame _frame;
-	private FractalPanel _fractalPanel;
-	private Mandelbrot _mandelbrot;
-	private Julia _julia;
-	private BurningShip _burningShip;
-	private Multibrot _multibrot;
-	private Model _model;
-	private JMenuItem _fileMenuItem1;
-	private JMenuItem _fileMenuItem2;
-	private JMenuItem _fractalMenuItem1;
-	private JMenuItem _fractalMenuItem2;
-	private JMenuItem _fractalMenuItem3;
-	private JMenuItem _fractalMenuItem4;
-	private JMenuItem _colorMenuItem1;
-	private JMenuItem _colorMenuItem2;
-	private JMenuItem _colorMenuItem3;
-	private JMenuItem _colorMenuItem4;
+	private JFrame _frame; //provide a window for GUI
+	private FractalPanel _fractalPanel; //contains required method for updating the fractal image
+	private Mandelbrot _mandelbrot; //access to the code in that class
+	private Julia _julia; //access to the code in that class
+	private BurningShip _burningShip; //access to the code in that class
+	private Multibrot _multibrot; //access to the code in that class
+	private Model _model; //access to the code in that class
+	private JMenuItem _fileMenuItem1; //menu item in file menu
+	private JMenuItem _fileMenuItem2; //menu item in file menu
+	private JMenuItem _fractalMenuItem1; //menu item in fractal menu
+	private JMenuItem _fractalMenuItem2; //menu item in fractal menu
+	private JMenuItem _fractalMenuItem3; //menu item in fractal menu
+	private JMenuItem _fractalMenuItem4; //menu item in fractal menu
+	private JMenuItem _colorMenuItem1; //menu item in color menu
+	private JMenuItem _colorMenuItem2; //menu item in color menu
+	private JMenuItem _colorMenuItem3; //menu item in color menu
+	private JMenuItem _colorMenuItem4; //menu item in color menu
 	
 	/**
 	 * Composition of all the needed class.

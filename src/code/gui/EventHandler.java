@@ -13,7 +13,7 @@ import code.Model;
  */
 public class EventHandler implements ActionListener {
 	
-	private Model _model; 
+	private Model _model; //access to the Model class
 	
 	/**
 	 * This method is association of Model class.
