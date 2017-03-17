@@ -85,6 +85,16 @@ public class ColorModelFactory {
     return retVal;
   }
   
+  /**
+   * Create a color model that contains different shades of light blue and pink to purple.
+   * The number of colors included in the model is set by the parameter.
+   * This should be 1 more than the maximum number of steps for the fractal.
+   * 
+   * @param numColors
+   *          Number of different color shades to use.
+   * @return Color model that shows all of the different possible shades of light blue
+   *         from light blue to purple.
+   */
   public static IndexColorModel createMyOwnColorModel(int numColors) {
 	 byte[] reds = new byte[numColors];
 	 byte[] greens = new byte[numColors];

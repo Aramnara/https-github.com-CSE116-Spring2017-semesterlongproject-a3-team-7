@@ -1,7 +1,5 @@
 package code;
 
-import java.security.InvalidParameterException;
-
 /**
  * This class contains all the methods needed for Julia set
  * which would return a 2d-Array fractal.
@@ -112,12 +110,17 @@ public class Julia {
 		return add;
 	}
 	
+	/**
+	 * This method allows to change the escape distance 
+	 * of the fractal for the escape time calculation.
+	 * 
+	 * @param escapeDistance = user-entered escape distance.
+	 * @return a user-entered escape distance of type int.
+	 */
 	public int escapeDistance(int escapeDistance) {
 		if (escapeDistance > 0) {
 			_escapeDistance = escapeDistance;	
-		} else {
-			throw new InvalidParameterException();
-		}
+		} 
 		return _escapeDistance;
 	}
 }

@@ -3,26 +3,31 @@ package code.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JMenuItem;
-
 import code.Model;
 
+/**
+ * This class provides the EventHandler for the JMenuItem of 
+ * changing the escape distance.
+ * 
+ * @author Zhenduo Lin
+ */
 public class EventHandler implements ActionListener {
 	
-	private Model _model;
-	private JMenuItem _menuItem1;
-	private JMenuItem _meunItem2;
-	private GUI _gui;
+	private Model _model; 
 	
-	public EventHandler() {
-		_model = new Model();
-		_menuItem1 = new JMenuItem("Exit");
-		_meunItem2 = new JMenuItem("Mandelbrot");
-		_gui = new GUI();
+	/**
+	 * This method is association of Model class.
+	 * @param m = type Model used for association.
+	 */
+	public EventHandler(Model m) {
+		_model = m; //association
 	}
 	
+	/**
+	 * This method allows to handle the change from the model class.
+	 */
 	public void actionPerformed(ActionEvent e) {
-		
+		_model.changeEscapeDistance();
 	}
 
 }

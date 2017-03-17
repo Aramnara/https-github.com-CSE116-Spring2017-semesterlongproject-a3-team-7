@@ -2,8 +2,6 @@ package code.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.IndexColorModel;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -20,6 +18,14 @@ import code.Multibrot;
 import edu.buffalo.fractal.ColorModelFactory;
 import edu.buffalo.fractal.FractalPanel;
 
+/**
+ * This class contains all the method and the GUI that is needed to generate 
+ * different fractals.
+ * 
+ * @author Zhenduo Lin
+ * @author Anthony Ramnarain
+ * @author JaeHoon Oh
+ */
 public class GUI implements Runnable {
 	
 	private JFrame _frame;
@@ -28,7 +34,6 @@ public class GUI implements Runnable {
 	private Julia _julia;
 	private BurningShip _burningShip;
 	private Multibrot _multibrot;
-	private ColorModelFactory _colorModelFactory;
 	private Model _model;
 	private JMenuItem _fileMenuItem1;
 	private JMenuItem _fileMenuItem2;
@@ -41,30 +46,30 @@ public class GUI implements Runnable {
 	private JMenuItem _colorMenuItem3;
 	private JMenuItem _colorMenuItem4;
 	
+	/**
+	 * Composition of all the needed class.
+	 */
 	public GUI() {
 		_fractalPanel = new FractalPanel();
 		_mandelbrot = new Mandelbrot();
 		_julia = new Julia();
 		_burningShip = new BurningShip();
 		_multibrot = new Multibrot();
-		_colorModelFactory = new ColorModelFactory();
 		_model = new Model();
 	}
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new GUI());
-	}
-	
+	/**
+	 * Provide the entire GUI frame.
+	 */
 	public void run() {
-		_frame = new JFrame("Fractals");
+		_frame = new JFrame("Fractals");  //entire frame
 		
-		ActionListener a;
-		a = new EventHandler();
-		
-		JMenu fileMenu = new JMenu("File");
-		JMenu fractalMenu = new JMenu("Fractal");
+		//three menus in the frame
+		JMenu fileMenu = new JMenu("File");  
+		JMenu fractalMenu = new JMenu("Fractal"); 
 		JMenu colorMenu = new JMenu("Color");
-
+		
+		//all the menu items contained in each of the menu
 		_fileMenuItem1 = new JMenuItem("Change Escape Distance");
 		_fileMenuItem1.setEnabled(true);
 		_fileMenuItem2 = new JMenuItem("Exit");
@@ -86,18 +91,24 @@ public class GUI implements Runnable {
 		_colorMenuItem4 = new JMenuItem("Supreme Pink Golden Lightblue");
 		_colorMenuItem4.setEnabled(true);
 		
-		JMenuBar menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar(); //menu bar
 		
-		_fileMenuItem2.addActionListener(a);
+		//ActionListener used to observe and allow the input by user
+		ActionListener a;
+		a = new EventHandler(_model);
+		//when clicked, pop out the window for changing the escape distance.
+		_fileMenuItem1.addActionListener(a);
+		//when clicked, exit the program
 		_fileMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 		
-		selectedColor();
-		selectedFractal();
+		selectedColor();  //select color for fractal
+		selectedFractal(); //select fractal
 		
+		//add each menu item into the menu
 		fileMenu.add(_fileMenuItem1);
 		fileMenu.add(_fileMenuItem2);
 		fractalMenu.add(_fractalMenuItem1);
@@ -113,68 +124,77 @@ public class GUI implements Runnable {
 		menuBar.add(colorMenu);
 		_frame.setJMenuBar(menuBar);
 		
-		_model.addObserver(this);
-//		update();
+		_model.addObserver(this); //for observe the GUI
 		
-		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		_frame.pack();
-		_frame.setVisible(true);
+		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when click exit, exit the program
+		_frame.pack(); //auto-size the window
+		_frame.setVisible(true); //show the window
 	}
 	
+	/**
+	 * used to change the escape distance that user entered.
+	 */
 	public void update() {
-		_fileMenuItem1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int i = 0;
-				while (i <= 0) {
-					String EscapeDistance = JOptionPane.showInputDialog("Please Enter Escape Distance");
-					if (EscapeDistance.length()>0) {
-						int escapeDistance = Integer.parseInt(EscapeDistance);
-						_mandelbrot.escapeDistance(escapeDistance);
-						_julia.escapeDistance(escapeDistance);
-						_burningShip.escapeDistance(escapeDistance);
-						_multibrot.escapeDistance(escapeDistance);
-						System.out.println("Success");
-						i += 1;
-					} else {
-						System.out.println("Please enter some number!");
-					}
+		int i = 0;
+		//a loop that restricting only 1 option pane appeared when clicked
+		while (i <= 0) {
+			//option pane allows user to enter escape distance
+			String EscapeDistance = JOptionPane.showInputDialog("Please Enter Escape Distance");
+			if (EscapeDistance.length()>0) {
+				int escapeDistance = Integer.parseInt(EscapeDistance); //change the String input into int
+				//calling the method from each of four fractal classes to update the entered escape distance
+				_mandelbrot.escapeDistance(escapeDistance);
+				_julia.escapeDistance(escapeDistance);
+				_burningShip.escapeDistance(escapeDistance);
+				_multibrot.escapeDistance(escapeDistance);
+				//showing the error message when entering an invalid escape distance
+				if (escapeDistance < 1) {
+					JOptionPane.showMessageDialog(null,"The entered escape distance is invalid.","Error" ,JOptionPane.ERROR_MESSAGE);
+					_model.changeEscapeDistance(); //reopen the option pane
 				}
+				i += 1;
+			} else {
+				System.out.println("Please enter some number!");
 			}
-		});
+		}
+		
 	}
 	
+	/*
+	 * This method allows to set the color for fractals when each of the menu item is selected 
+	 */
 	public void selectedColor() {
+		//when clicked, set the color to rainbow
 		_colorMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createRainbowColorModel(226));
-//				selectedFractal();
+				_fractalPanel.setIndexColorModel(ColorModelFactory.createRainbowColorModel(226));
 			}
 		});
+		//when clicked, set the color to blue
 		_colorMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createBluesColorModel(226));
-//				selectedFractal();
+				_fractalPanel.setIndexColorModel(ColorModelFactory.createBluesColorModel(226));
 			}
 		});
+		//when clicked, set the color to grey
 		_colorMenuItem3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createGrayColorModel(226));
-//				selectedFractal();
+				_fractalPanel.setIndexColorModel(ColorModelFactory.createGrayColorModel(226));
 			}
 		});
+		//when clicked, set the color to supreme pink golden lightblue
 		_colorMenuItem4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.setIndexColorModel(_colorModelFactory.createMyOwnColorModel(226));
-//				selectedFractal();
+				_fractalPanel.setIndexColorModel(ColorModelFactory.createMyOwnColorModel(226));
 			}
 		});
 	}
 	
-//	public IndexColorModel defaultColor() {
-//		return _colorModelFactory.createRainbowColorModel(226);
-//	}
-	
+	/**
+	 * This method allows to choose the fractal that user want to depict.
+	 */
 	public void selectedFractal() {
+		//when clicked, the mandelbrot fractal would appear
 		_fractalMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_fractalPanel.updateImage(_mandelbrot.finalFractal());
@@ -183,6 +203,7 @@ public class GUI implements Runnable {
 				_frame.pack();
 			}
 		});
+		//when clicked, the julia fractal would appear
 		_fractalMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_fractalPanel.updateImage(_julia.finalFractal());
@@ -191,6 +212,7 @@ public class GUI implements Runnable {
 				_frame.pack();
 			}
 		});
+		//when clicked, the burning ship fractal would appear
 		_fractalMenuItem3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_fractalPanel.updateImage(_burningShip.finalFractal());
@@ -199,6 +221,7 @@ public class GUI implements Runnable {
 				_frame.pack();
 			}
 		});
+		//when clicked, the multibrot fractal would appear
 		_fractalMenuItem4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_fractalPanel.updateImage(_multibrot.finalFractal());

@@ -1,54 +1,33 @@
 package code;
 
-import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-
 import code.gui.GUI;
-import edu.buffalo.fractal.ColorModelFactory;
-import edu.buffalo.fractal.FractalPanel;
 
+/**
+ * This class contains the calculation that is being observed by GUI.
+ * 
+ * @author Zhenduo Lin
+ */
 public class Model {
 		
-	private GUI _observer;
-	private FractalPanel _fractalPanel;
-	private JFrame _frame;
-	private Mandelbrot _mandelbrot;
-	private Julia _julia;
-	private BurningShip _burningShip;
-	private Multibrot _multibrot;
+	private GUI _observer; // instance variable of type class GUI
 	
 	public Model() {
-		_fractalPanel = new FractalPanel();
-		_frame = new JFrame();
-		_mandelbrot = new Mandelbrot();
-		_julia = new Julia();
-		_burningShip = new BurningShip();
-		_multibrot = new Multibrot();
+
 	}
+	
+	/**
+	 * This method is used to make the association of GUI.
+	 * @param gui = type class GUI, which is used for association.
+	 */
 	public void addObserver(GUI gui) {
-		_observer = gui;
-		_observer.update();
+		_observer = gui;  //association of GUI 
 	}
 	
-	public void changeEscapeDistance(int escapeDistance) {
-		_mandelbrot.escapeDistance(escapeDistance);
-		_julia.escapeDistance(escapeDistance);
-		_burningShip.escapeDistance(escapeDistance);
-		_multibrot.escapeDistance(escapeDistance);
-		_observer.update();
+	/**
+	 * This method is used to change the escape distance observed in the update method.
+	 */
+	public void changeEscapeDistance() {
+		_observer.update();   //tell the GUI to update
 	}
 	
-	public void selectExit(JMenuItem menuItem) {
-//			System.exit(0);
-//			_observer.update();	
-	}
-	
-	public void selectMandelbrot(JMenuItem menuItem) {
-//		_fractalPanel.setIndexColorModel(ColorModelFactory.createMyOwnColorModel(256));
-//		_fractalPanel.updateImage(_mandelbrot.finalFractal());
-//		_observer.getFrame().setVisible(true);
-//		_observer.getFrame().add(_fractalPanel);
-//		_observer.getFrame().pack();
-//		_observer.update();
-	}
 }
