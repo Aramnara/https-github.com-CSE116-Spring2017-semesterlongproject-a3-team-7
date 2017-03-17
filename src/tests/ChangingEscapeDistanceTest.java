@@ -68,4 +68,5 @@ public class ChangingEscapeDistanceTest {
 		multibrot.escapeDistance(3);
 		assertEquals(10, multibrot.calcEscapeTime(0.7025440313111545, -0.5520547945205528));
 	}
+	
 }
