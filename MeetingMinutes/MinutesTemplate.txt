@@ -1,4 +1,4 @@
-Meeting Minutes for _________03/27/17______:
+Meeting Minutes for _________04/03/17______:
 
 Meeting Attendance:
   *Zhen
@@ -6,7 +6,7 @@ Meeting Attendance:
   *Jae
 
 Tasks completed since last meeting:
-  *Finishing Phase 2
+  *Start Phase 3
 
 Tasks started, but not completed, since last meeting:
   *Phase 3
