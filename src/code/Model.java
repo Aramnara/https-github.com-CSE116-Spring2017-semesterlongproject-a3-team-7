@@ -28,4 +28,8 @@ public class Model {
 	public void changeEscapeDistance() {
 		_observer.update();   //tell the GUI to update
 	}
+	
+	public void changeEscapeTime() {
+		_observer.escapeTime();
+	}
 }

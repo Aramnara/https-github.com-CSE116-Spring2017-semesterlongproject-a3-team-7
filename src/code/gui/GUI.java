@@ -1,7 +1,12 @@
 package code.gui;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -13,9 +18,15 @@ import code.BurningShip;
 import code.Julia;
 import code.Mandelbrot;
 import code.Model;
+import code.Mouse;
 import code.Multibrot;
 import edu.buffalo.fractal.ColorModelFactory;
 import edu.buffalo.fractal.FractalPanel;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 
 /**
  * This class contains all the method and the GUI that is needed to generate 
@@ -34,6 +45,7 @@ public class GUI implements Runnable {
 	private BurningShip _burningShip; //access to the code in that class
 	private Multibrot _multibrot; //access to the code in that class
 	private Model _model; //access to the code in that class
+	private JMenuItem _fileMenuItem0;
 	private JMenuItem _fileMenuItem1; //menu item in file menu
 	private JMenuItem _fileMenuItem2; //menu item in file menu
 	private JMenuItem _fractalMenuItem1; //menu item in fractal menu
@@ -44,17 +56,46 @@ public class GUI implements Runnable {
 	private JMenuItem _colorMenuItem2; //menu item in color menu
 	private JMenuItem _colorMenuItem3; //menu item in color menu
 	private JMenuItem _colorMenuItem4; //menu item in color menu
+	private Mouse _mouse;
+	private int _startX, _startY;
+	private int _prevX, _prevY;
+	private boolean _dragging;
+	private Graphics _g;
+	double[] _xSet;
+	double[] _ySet;
+	double[] _juliaXset;
+	double[] _juliaYset;
+	double[] _burningShipXset;
+	double[] _burningShipYset;
+	double[] _multibrotXset;
+	double[] _multibrotYset;
+	int[][] _image;
+	double _newXmin;
+	double _newXmax;
+	double _newYmin;
+	double _newYmax;
 	
 	/**
 	 * Composition of all the needed class.
 	 */
 	public GUI() {
 		_fractalPanel = new FractalPanel();
+//		_fractalPanel.addMouseListener(_mouse);
+//		_fractalPanel.addMouseMotionListener(_mouse);
 		_mandelbrot = new Mandelbrot();
 		_julia = new Julia();
 		_burningShip = new BurningShip();
 		_multibrot = new Multibrot();
 		_model = new Model();
+		_mouse = new Mouse();
+//		_mandelbrotXset = _mandelbrot.xCoordinate(-2.15, 0.6);
+//		_mandelbrotYset = _mandelbrot.yCoordinate(-1.3, 1.3); 
+//		_juliaXset = _julia.xCoordinate(-1.7, 1.7);
+//		_juliaYset = _julia.yCoordinate(-1, 1);
+		_newXmin = 0.0;
+		_newYmin = 0.0;
+		_newXmax = 0.0;
+		_newYmax = 0.0;
 	}
 	
 	/**
@@ -69,6 +110,8 @@ public class GUI implements Runnable {
 		JMenu colorMenu = new JMenu("Color");
 		
 		//all the menu items contained in each of the menu
+		_fileMenuItem0 = new JMenuItem("Change Escape Time");
+		_fileMenuItem0.setEnabled(true);
 		_fileMenuItem1 = new JMenuItem("Change Escape Distance");
 		_fileMenuItem1.setEnabled(true);
 		_fileMenuItem2 = new JMenuItem("Exit");
@@ -95,6 +138,9 @@ public class GUI implements Runnable {
 		//ActionListener used to observe and allow the input by user
 		ActionListener a;
 		a = new EventHandler(_model);
+//		ActionListener b;
+//		b = new EventHandler(_model);
+//		_fileMenuItem0.addActionListener(b);
 		//when clicked, pop out the window for changing the escape distance.
 		_fileMenuItem1.addActionListener(a);
 		//when clicked, exit the program
@@ -106,8 +152,13 @@ public class GUI implements Runnable {
 		
 		selectedColor();  //select color for fractal
 		selectedFractal(); //select fractal
+		escapeTime();
+		Mouse();
+//		_fractalPanel.addMouseListener(_mouse);
+//		_fractalPanel.addMouseMotionListener(_mouse);
 		
 		//add each menu item into the menu
+		fileMenu.add(_fileMenuItem0);
 		fileMenu.add(_fileMenuItem1);
 		fileMenu.add(_fileMenuItem2);
 		fractalMenu.add(_fractalMenuItem1);
@@ -156,7 +207,31 @@ public class GUI implements Runnable {
 				System.out.println("Please enter some number!");
 			}
 		}
-		
+	}
+	
+	public void escapeTime() {
+		_fileMenuItem0.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = 0;
+				while (i <= 0) {
+					String EscapeTime = JOptionPane.showInputDialog("Please Enter Escape Time");
+					if (EscapeTime.length()>0) {
+						int escapeTime = Integer.parseInt(EscapeTime);
+						_mandelbrot.escapeDistance(escapeTime);
+						_julia.escapeDistance(escapeTime);
+						_burningShip.escapeDistance(escapeTime);
+						_multibrot.escapeDistance(escapeTime);
+						if (escapeTime < 1 || escapeTime > 255) {
+							JOptionPane.showMessageDialog(null,"The entered escape time is invalid.","Error" ,JOptionPane.ERROR_MESSAGE);
+							_model.changeEscapeTime(); 
+						}
+						i += 1;
+					} else {
+						System.out.println("Please enter some number!");
+					}
+				}
+			}
+		});
 	}
 	
 	/*
@@ -193,10 +268,17 @@ public class GUI implements Runnable {
 	 * This method allows to choose the fractal that user want to depict.
 	 */
 	public void selectedFractal() {
+		_newXmin = 0.0;
+		_newYmin = 0.0;
+		_newXmax = 0.0;
+		_newYmax = 0.0;
 		//when clicked, the mandelbrot fractal would appear
 		_fractalMenuItem1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.updateImage(_mandelbrot.finalFractal());
+				_fractalPanel.updateImage(_mandelbrot.finalFractal(-2.15, 0.6, -1.3, 1.3));
+				_xSet = _mandelbrot.xCoordinate(-2.15, 0.6);
+				_ySet = _mandelbrot.yCoordinate(-1.3, 1.3);
+//				_image = _mandelbrot.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
 				_frame.pack();
@@ -205,7 +287,10 @@ public class GUI implements Runnable {
 		//when clicked, the julia fractal would appear
 		_fractalMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.updateImage(_julia.finalFractal());
+				_fractalPanel.updateImage(_julia.finalFractal(-1.7, 1.7, -1, 1));
+				_juliaXset = _julia.xCoordinate(-1.7, 1.7);
+				_juliaYset = _julia.yCoordinate(-1, 1);
+//				_image = _julia.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
 				_frame.pack();
@@ -227,6 +312,57 @@ public class GUI implements Runnable {
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
 				_frame.pack();
+			}
+		});
+	}
+	public JMenuItem fileMenuItem0() {
+		return _fileMenuItem0;
+	}
+	public JMenuItem fileMenuItem1() {
+		return _fileMenuItem1;
+	}
+	public void Mouse() {
+		_fractalPanel.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				Component src = (Component) e.getSource();
+				e.getSource();
+				_startX = e.getX();
+				_startY = e.getY();
+				_prevX = _startX;
+				_prevY = _startY;
+				
+			}
+
+			public void mouseReleased(MouseEvent e) {
+				Component src = (Component) e.getSource();
+				int x = e.getX();
+				int y = e.getY();
+				_newXmin = _xSet[_startX];
+				_newYmin = _ySet[_startY]; 
+				_newXmax = _xSet[x];
+				_newYmax = _ySet[y];
+				_xSet = _mandelbrot.xCoordinate(_newXmin, _newXmax);
+				_ySet = _mandelbrot.yCoordinate(_newYmin, _newYmax);
+				_juliaXset = _julia.xCoordinate(_newXmin, _newXmax);
+				_juliaYset = _julia.yCoordinate(_newYmin, _newYmax);
+//				if (_fractalMenuItem1.isSelected()) {
+//					_image = _mandelbrot.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
+//				}
+				_image = _mandelbrot.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
+				_fractalPanel.updateImage(_image);
+			}
+		});
+		_fractalPanel.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent e) {
+				Component src = (Component) e.getSource();
+				int x = e.getX();
+				int y = e.getY();
+				_g = src.getGraphics();
+				_g.setColor(Color.BLUE);
+				_g.drawRect(_startX, _startY, Math.abs(x-_startX), Math.abs(y-_startY));
+				src.paint(_g);
+				_prevX = x;
+				_prevY = y;
 			}
 		});
 	}

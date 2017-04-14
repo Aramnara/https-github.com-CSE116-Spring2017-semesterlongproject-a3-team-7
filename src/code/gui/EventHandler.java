@@ -14,6 +14,7 @@ import code.Model;
 public class EventHandler implements ActionListener {
 	
 	private Model _model; //access to the Model class
+	private GUI _gui;
 	
 	/**
 	 * This method is association of Model class.
@@ -21,12 +22,20 @@ public class EventHandler implements ActionListener {
 	 */
 	public EventHandler(Model m) {
 		_model = m; //association
+		_gui = new GUI();
 	}
 	
 	/**
 	 * This method allows to handle the change from the model class.
 	 */
 	public void actionPerformed(ActionEvent e) {
+//		Object obj = e.getSource();
+//		if (e.getSource() == _gui.fileMenuItem0()) {
+//			_model.changeEscapeTime();	
+//		} else {
+//			_model.changeEscapeDistance();			
+//		}
 		_model.changeEscapeDistance();
+//		_model.changeEscapeTime();
 	}
 }

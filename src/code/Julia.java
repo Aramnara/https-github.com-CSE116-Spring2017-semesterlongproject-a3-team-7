@@ -9,6 +9,7 @@ package code;
 public class Julia {
 	
 	private int _escapeDistance = 2; //Initial escape distance
+	private int _escapeTime = 0;
 
 	/** 
 	 * This method returns a 2d-Array of type int
@@ -52,12 +53,15 @@ public class Julia {
 	 * 
 	 * @return an array of type double containing all the x-coordinates in the fractal.
 	 */
-	public double[] xCoordinate() {
+	public double[] xCoordinate(double xMin, double xMax) {
 		double[] xSet = new double[512];
 		int rows = 0;
-		for (double x=-1.7; x<=1.7; x+=3.4/512) {
-		xSet[rows] = x;
-		rows = add(rows);
+//		xMin = -2.15;
+//		xMax = 0.6;
+		double increase = (xMax - xMin)/512;
+		for (double x=xMin; x<=xMax; x+=increase) {
+			xSet[rows] = x;
+			rows = add(rows);
 		}
 		return xSet;
 	}
@@ -67,10 +71,13 @@ public class Julia {
 	 * 
 	 * @return an array of type double containing all the y-coordinates in the fractal.
 	 */
-	public double [] yCoordinate() {
-		double [] ySet = new double[512];
+	public double[] yCoordinate(double yMin, double yMax) {
+		double[] ySet = new double[512];
 		int rows = 0;
-		for (double y=-1.0; y<=1.0; y+=2.0/512) {
+//		yMin = -1.3;
+//		yMax = 1.3;
+		double increase = (yMax - yMin)/512;
+		for (double y=yMin; y<=yMax; y+=increase) {
 			ySet[rows] = y;
 			rows = add(rows);
 		}
@@ -83,11 +90,22 @@ public class Julia {
 	 * 
 	 * @return a 2d-array of fractal.
 	 */
-	public int[][] finalFractal() {
+	public int[][] finalFractal(double xMin, double xMax, double yMin, double yMax) {
+//		int rows = 0;
+//		int cols = 0;
 		int[][] pixel = fractal();
+		double[] xSet = xCoordinate(xMin, xMax);
+		double[] ySet = yCoordinate(yMin, yMax);
+//		for (double x=-2.15; x<=0.6; x+=2.75/512) {
+//			for (double y=-1.3; y<=1.3; y+=2.6/512) {
+//				pixel[rows][cols] = calcEscapeTime(x, y);
+//				cols = add(cols);
+//			}
+//			rows = add(rows);
+//		}
 		for (int rows=0; rows<512; rows+=1) {
 			for (int cols=0; cols<512; cols+=1) {
-				pixel[rows][cols] = calcEscapeTime(xCoordinate()[rows], yCoordinate()[cols]);
+				pixel[rows][cols] = calcEscapeTime(xSet[rows], ySet[cols]);
 			}
 		}
 		return pixel;
@@ -122,5 +140,11 @@ public class Julia {
 			_escapeDistance = escapeDistance;	
 		} 
 		return _escapeDistance;
+	}
+	public int escapeTime(int escapeTime) {
+		if (escapeTime > 0 && escapeTime <= 255) {
+			_escapeTime = escapeTime;
+		}
+		return _escapeTime;
 	}
 }

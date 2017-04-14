@@ -28,10 +28,10 @@ public class FractalTest {
 		int[][] testArray = new int[512][512];
 		
 		Mandelbrot mandelbrot = new Mandelbrot();
-		assertEquals(testArray.length, mandelbrot.finalFractal().length, 0.001);
+		assertEquals(testArray.length, mandelbrot.finalFractal(-2.16, 0.6, -1.3, 1.3).length, 0.001);
 		
 		Julia julia = new Julia();
-		assertEquals(testArray.length, julia.finalFractal().length, 0.001);
+		assertEquals(testArray.length, julia.finalFractal(-1.7, 1.7, -1, 1).length, 0.001);
 		
 		BurningShip burningship = new BurningShip();
 		assertEquals(testArray.length, burningship.finalFractal().length, 0.001);

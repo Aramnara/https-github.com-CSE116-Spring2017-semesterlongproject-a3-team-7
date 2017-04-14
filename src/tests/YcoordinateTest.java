@@ -27,7 +27,7 @@ public class YcoordinateTest {
 	@Test
 	public void MandelbrotSetTest() {
 		Mandelbrot mandelbrot = new Mandelbrot();
-		double[] yTest = mandelbrot.yCoordinate();
+		double[] yTest = mandelbrot.yCoordinate(-1.3, 1.3);
 		assertEquals(-1.3, yTest[0], 0.01);
 		assertEquals(-1.28, yTest[4], 0.01);
 		assertEquals(0.117, yTest[279], 0.01);
@@ -42,7 +42,7 @@ public class YcoordinateTest {
 	@Test
 	public void JuilaSetTest() {
 		Julia julia = new Julia();
-		double[] yTest = julia.yCoordinate();
+		double[] yTest = julia.yCoordinate(-1, 1);
 		assertEquals(-.972, yTest[7], 0.01);
 		assertEquals(-.929, yTest[18], 0.01);
 		assertEquals(.355, yTest[347], 0.01);
