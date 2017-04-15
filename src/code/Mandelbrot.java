@@ -9,7 +9,7 @@ package code;
 public class Mandelbrot {
 	
 	private int _escapeDistance = 2; //Initial escape distance
-	private int _escapeTime = 0;
+	private int _maximumEscapeTime = 225; //Inital escape time
 	
 	/** 
 	 * This method returns a 2d-Array of type int
@@ -36,21 +36,23 @@ public class Mandelbrot {
 		double yCalc = currentY;
 		double dist = Math.sqrt((xCalc * xCalc) + (yCalc * yCalc));
 		int passes = 0;
-//		int escapeTime = 0;
-		while (dist <= _escapeDistance && passes < 225) {
+		int escapeTime;
+		while (dist <= _escapeDistance && passes < _maximumEscapeTime) {
 			double xTemp = xCalc;
 			xCalc = (xCalc * xCalc) - (yCalc * yCalc) + currentX;
 			yCalc = 2 * xTemp * yCalc + currentY;
 			passes += 1;
 			dist = Math.sqrt((xCalc * xCalc) + (yCalc * yCalc));
 		}
-		_escapeTime = passes;
-		return _escapeTime;
+		escapeTime = passes;
+		return escapeTime;
 	}
 	
 	/**
 	 * This method records all the x-coordinates used in the Mandelbrot Set.
 	 * 
+	 * @param xMin = starting x-coordinate, minimum x-coordinate
+	 * @param xMax = ending x-coordinate, maximum x-coordinate
 	 * @return an array of type double containing all the x-coordinates in the fractal.
 	 */
 	public double[] xCoordinate(double xMin, double xMax) {
@@ -67,6 +69,8 @@ public class Mandelbrot {
 	/**
 	 * This method records all the y-coordinates used in the Mandelbrot Set.
 	 * 
+	 * @param yMin = starting y-coordinate, minimum y-coordinate
+	 * @param yMax = ending y-coordinate, maximum y-coordinate
 	 * @return an array of type double containing all the y-coordinates in the fractal.
 	 */
 	public double[] yCoordinate(double yMin, double yMax) {
@@ -84,21 +88,16 @@ public class Mandelbrot {
 	 * This method depicts the final 2d-array of the fractal
 	 * within certain range and filled with escape time.
 	 * 
+	 * @param xMin = starting x-coordinate, minimum x-coordinate
+	 * @param xMax = ending x-coordinate, maximum x-coordinate
+	 * @param yMin = starting y-coordinate, minimum y-coordinate
+	 * @param yMax = ending y-coordinate, maximum y-coordinate
 	 * @return a 2d-array of fractal.
 	 */
 	public int[][] finalFractal(double xMin, double xMax, double yMin, double yMax) {
-//		int rows = 0;
-//		int cols = 0;
 		int[][] pixel = fractal();
 		double[] xSet = xCoordinate(xMin, xMax);
 		double[] ySet = yCoordinate(yMin, yMax);
-//		for (double x=-2.15; x<=0.6; x+=2.75/512) {
-//			for (double y=-1.3; y<=1.3; y+=2.6/512) {
-//				pixel[rows][cols] = calcEscapeTime(x, y);
-//				cols = add(cols);
-//			}
-//			rows = add(rows);
-//		}
 		for (int rows=0; rows<512; rows+=1) {
 			for (int cols=0; cols<512; cols+=1) {
 				pixel[rows][cols] = calcEscapeTime(xSet[rows], ySet[cols]);
@@ -138,12 +137,18 @@ public class Mandelbrot {
 		return _escapeDistance;
 	}
 	
-	public int escapeTime(int escapeTime) {
-		if (escapeTime > 0 && escapeTime <= 255) {
-			_escapeTime = escapeTime;
+	/**
+	 * This method allows to change the maximum escape time 
+	 * of the fractal for the calculation.
+	 * 
+	 * @param maximumEscapeTime = user-entered maximum escape time.
+	 * @return a user-entered maximum escape time of type int.
+	 */
+	public int escapeTime(int maximumEscapeTime) {
+		if (maximumEscapeTime > 0 && maximumEscapeTime <= 255) {
+			_maximumEscapeTime = maximumEscapeTime;
 		}
-		return _escapeTime;
+		return _maximumEscapeTime;
 	}
-	
-	
+		
 }

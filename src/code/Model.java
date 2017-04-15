@@ -29,7 +29,4 @@ public class Model {
 		_observer.update();   //tell the GUI to update
 	}
 	
-	public void changeEscapeTime() {
-		_observer.escapeTime();
-	}
 }

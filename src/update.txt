@@ -2,8 +2,18 @@ To update the escape distance, you need to follow the following steps:
 
 	1. Run the Driver in the code package
 	2. Open "File" menu bar
-	3. Select change escape distance
+	3. Select "Change Escape Distance"
 	4. Enter any integer that is greater than 0
 	5. If you enter the integer that is less than or equal to 0,
+	   the error message will pop out
+	6. Once you enter a valid escape distance, you can choose any fractal to see the difference.
+	
+To update the escape distance, you need to follow the following steps:
+
+	1. Run the Driver in the code package
+	2. Open "File" menu bar
+	3. Select "Change Escape Time"
+	4. Enter any integer between 1 and 255
+	5. If you enter the integer that is less than or equal to 0, or greater than 255
 	   the error message will pop out
 	6. Once you enter a valid escape distance, you can choose any fractal to see the difference.

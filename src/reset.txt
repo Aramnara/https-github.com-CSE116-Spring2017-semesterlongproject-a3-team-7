@@ -1,0 +1,6 @@
+To reset the zoom of the fractal:
+
+	1. Run the Driver in the code package
+	2. Open "File" menu bar
+	3. Select "Reset zoom"
+	4. It will change back to the default fractal zoom
