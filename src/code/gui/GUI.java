@@ -232,12 +232,24 @@ public class GUI implements Runnable {
 			public void actionPerformed(ActionEvent e) {
 				if (selectedMandelbrot()) {
 					_fractalPanel.updateImage(_mandelbrot.finalFractal(-2.15, 0.6, -1.3, 1.3));
+					_xSet = _mandelbrot.xCoordinate(-2.15, 0.6);
+					_ySet = _mandelbrot.yCoordinate(-1.3, 1.3);
+					_image = _mandelbrot.finalFractal(-2.15, 0.6, -1.3, 1.3);
 				} else if (selectedJulia()){
 					_fractalPanel.updateImage(_julia.finalFractal(-1.7, 1.7, -1, 1));
+					_xSet = _julia.xCoordinate(-1.7, 1.7);
+					_ySet = _julia.yCoordinate(-1, 1);
+					_image = _julia.finalFractal(-1.7, 1.7, -1, 1);
 				} else if (selectedBurningShip()) {
 					_fractalPanel.updateImage(_burningShip.finalFractal(-1.8, -1.7, -0.08, 0.025));
+					_xSet = _burningShip.xCoordinate(-1.8, -1.7);
+					_ySet = _burningShip.yCoordinate(-0.08, 0.025);
+					_image = _burningShip.finalFractal(-1.8, -1.7, -0.08, 0.025);
 				} else if (selectedMultibrot()){
 					_fractalPanel.updateImage( _multibrot.finalFractal(-1, 1, -1.3, 1.3));
+					_xSet = _multibrot.xCoordinate();
+					_ySet = _multibrot.yCoordinate(-1.3, 1.3);
+					_image = _multibrot.finalFractal(-1, 1, -1.3, 1.3);
 				}
 			}
 		});
@@ -405,6 +417,7 @@ public class GUI implements Runnable {
 				_newYmin = _ySet[_startY]; //get corresponding y-coordinate in the array set as a starting range
 				_newXmax = _xSet[x]; //get corresponding x-coordinate in the array set as a ending domain
 				_newYmax = _ySet[y]; //get corresponding x-coordinate in the array set as a ending range
+				//note that all the xCoordinate and yCoordinate method in four sets are identity on the algorithm
 				_xSet = _mandelbrot.xCoordinate(_newXmin, _newXmax); //re-allocate the new domain of x-coordinate into the array ready for next zoom in
 				_ySet = _mandelbrot.yCoordinate(_newYmin, _newYmax);//re-allocate the new range of y-coordinate into the array ready for next zoom in
 				//set image to the selected fractal with new calculation (zoom in process)
