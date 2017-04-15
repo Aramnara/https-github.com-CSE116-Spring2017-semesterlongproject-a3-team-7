@@ -34,9 +34,9 @@ public class FractalTest {
 		assertEquals(testArray.length, julia.finalFractal(-1.7, 1.7, -1, 1).length, 0.001);
 		
 		BurningShip burningship = new BurningShip();
-		assertEquals(testArray.length, burningship.finalFractal().length, 0.001);
+		assertEquals(testArray.length, burningship.finalFractal(-1.8, -1.7, -0.08, 0.025).length, 0.001);
 		
 		Multibrot multibrot = new Multibrot();
-		assertEquals(testArray.length, multibrot.finalFractal().length, 0.001);
+		assertEquals(testArray.length, multibrot.finalFractal(-1, 1, -1.3, 1.3).length, 0.001);
 	}
 }

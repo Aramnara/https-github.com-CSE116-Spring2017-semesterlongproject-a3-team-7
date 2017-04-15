@@ -63,12 +63,12 @@ public class GUI implements Runnable {
 	private Graphics _g;
 	double[] _xSet;
 	double[] _ySet;
-	double[] _juliaXset;
-	double[] _juliaYset;
-	double[] _burningShipXset;
-	double[] _burningShipYset;
-	double[] _multibrotXset;
-	double[] _multibrotYset;
+//	double[] _juliaXset;
+//	double[] _juliaYset;
+//	double[] _burningShipXset;
+//	double[] _burningShipYset;
+//	double[] _multibrotXset;
+//	double[] _multibrotYset;
 	int[][] _image;
 	double _newXmin;
 	double _newXmax;
@@ -288,8 +288,8 @@ public class GUI implements Runnable {
 		_fractalMenuItem2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				_fractalPanel.updateImage(_julia.finalFractal(-1.7, 1.7, -1, 1));
-				_juliaXset = _julia.xCoordinate(-1.7, 1.7);
-				_juliaYset = _julia.yCoordinate(-1, 1);
+				_xSet = _julia.xCoordinate(-1.7, 1.7);
+				_ySet = _julia.yCoordinate(-1, 1);
 //				_image = _julia.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
@@ -299,7 +299,7 @@ public class GUI implements Runnable {
 		//when clicked, the burning ship fractal would appear
 		_fractalMenuItem3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.updateImage(_burningShip.finalFractal());
+				_fractalPanel.updateImage(_burningShip.finalFractal(-1.8, -1.7, -0.08, 0.025));
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
 				_frame.pack();
@@ -308,7 +308,7 @@ public class GUI implements Runnable {
 		//when clicked, the multibrot fractal would appear
 		_fractalMenuItem4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				_fractalPanel.updateImage(_multibrot.finalFractal());
+				_fractalPanel.updateImage(_multibrot.finalFractal(-1, 1, -1.3, 1.3));
 				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
 				_frame.pack();
@@ -343,13 +343,14 @@ public class GUI implements Runnable {
 				_newYmax = _ySet[y];
 				_xSet = _mandelbrot.xCoordinate(_newXmin, _newXmax);
 				_ySet = _mandelbrot.yCoordinate(_newYmin, _newYmax);
-				_juliaXset = _julia.xCoordinate(_newXmin, _newXmax);
-				_juliaYset = _julia.yCoordinate(_newYmin, _newYmax);
-//				if (_fractalMenuItem1.isSelected()) {
-//					_image = _mandelbrot.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
+//				if (selectedFractal() == _fractalMenuItem1) {
+					_image = _mandelbrot.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
 //				}
-				_image = _mandelbrot.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
+//				else if(e.getSource() == _julia) {
+//					_image = _julia.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
+//				}
 				_fractalPanel.updateImage(_image);
+				
 			}
 		});
 		_fractalPanel.addMouseMotionListener(new MouseMotionAdapter() {

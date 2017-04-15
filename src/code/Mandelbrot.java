@@ -56,8 +56,6 @@ public class Mandelbrot {
 	public double[] xCoordinate(double xMin, double xMax) {
 		double[] xSet = new double[512];
 		int rows = 0;
-//		xMin = -2.15;
-//		xMax = 0.6;
 		double increase = (xMax - xMin)/512;
 		for (double x=xMin; x<=xMax; x+=increase) {
 			xSet[rows] = x;
@@ -74,8 +72,6 @@ public class Mandelbrot {
 	public double[] yCoordinate(double yMin, double yMax) {
 		double[] ySet = new double[512];
 		int rows = 0;
-//		yMin = -1.3;
-//		yMax = 1.3;
 		double increase = (yMax - yMin)/512;
 		for (double y=yMin; y<=yMax; y+=increase) {
 			ySet[rows] = y;
@@ -148,5 +144,6 @@ public class Mandelbrot {
 		}
 		return _escapeTime;
 	}
+	
 	
 }

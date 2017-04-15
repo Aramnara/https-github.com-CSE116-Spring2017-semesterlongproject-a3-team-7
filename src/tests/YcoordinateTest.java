@@ -57,7 +57,7 @@ public class YcoordinateTest {
 	@Test
 	public void BurningShipSetTest() {
 		BurningShip burningship = new BurningShip();
-		double[] yTest = burningship.yCoordinate();
+		double[] yTest = burningship.yCoordinate(-0.08, 0.025);
 		assertEquals(-0.078, yTest[10], 0.01);
 		assertEquals(-0.06, yTest[99], 0.01);
 		assertEquals(-0.039, yTest[200], 0.01);
@@ -67,7 +67,7 @@ public class YcoordinateTest {
 	@Test
 	public void MultibrotSetTest() {
 		Multibrot multibrot = new Multibrot();
-		double[] yTest = multibrot.yCoordinate();
+		double[] yTest = multibrot.yCoordinate(-1.3, 1.3);
 		assertEquals(-1.3, yTest[0], 0.01);
 		assertEquals(-1.27, yTest[5], 0.01);
 		assertEquals(-0.72, yTest[115], 0.01);

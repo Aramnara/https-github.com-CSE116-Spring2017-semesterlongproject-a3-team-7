@@ -57,7 +57,7 @@ public class XcoordinateTest {
 	@Test
 	public void BurningShipSetTest() {
 		BurningShip burningship = new BurningShip();
-		double[] xTest = burningship.xCoordinate();
+		double[] xTest = burningship.xCoordinate(-1.8, -1.7);
 		assertEquals(-1.8, xTest[0], 0.01);
 		assertEquals(-1.79, xTest[68], 0.01);
 		assertEquals(-1.75, xTest[265], 0.01);
