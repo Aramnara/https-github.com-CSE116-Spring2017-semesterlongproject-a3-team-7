@@ -2,6 +2,7 @@ package code.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 import code.BurningShip;
 import code.Julia;
@@ -20,7 +22,9 @@ import code.Mandelbrot;
 import code.Model;
 import code.Multibrot;
 import edu.buffalo.fractal.ColorModelFactory;
+import edu.buffalo.fractal.ComputePool;
 import edu.buffalo.fractal.FractalPanel;
+import edu.buffalo.fractal.WorkerResult;
 
 import java.awt.event.MouseMotionAdapter;
 
@@ -32,7 +36,7 @@ import java.awt.event.MouseMotionAdapter;
  * @author Anthony Ramnarain
  * @author JaeHoon Oh
  */
-public class GUI implements Runnable {
+public class GUI implements Runnable{
 	
 	private JFrame _frame; //provide a window for GUI
 	private FractalPanel _fractalPanel; //contains required method for updating the fractal image
@@ -90,6 +94,9 @@ public class GUI implements Runnable {
 		JMenu fileMenu = new JMenu("File");  
 		JMenu fractalMenu = new JMenu("Fractal"); 
 		JMenu colorMenu = new JMenu("Color");
+		
+//		_fractalPanel.setSize(2048, 2048);
+		_fractalPanel.setPreferredSize(new Dimension(2048, 2048));
 		
 		//all the menu items contained in each of the menu
 		_fileMenuItem0 = new JMenuItem("Change Escape Time");
@@ -161,8 +168,9 @@ public class GUI implements Runnable {
 		_model.addObserver(this); //for observe the GUI
 		
 		_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //when click exit, exit the program
-		_frame.pack(); //auto-size the window
+		_frame.setResizable(false);
 		_frame.setVisible(true); //show the window
+		_frame.pack(); //auto-size the window
 	}
 	
 	/**
@@ -301,7 +309,7 @@ public class GUI implements Runnable {
 				_fractalMenuItem2.setSelected(false);
 				_fractalMenuItem3.setSelected(false);
 				_fractalMenuItem4.setSelected(false);
-				_frame.setVisible(true);
+//				_frame.setVisible(true);
 				_frame.add(_fractalPanel);
 				_frame.pack();
 			}
@@ -412,7 +420,7 @@ public class GUI implements Runnable {
 			//event generated when release the mouse
 			public void mouseReleased(MouseEvent e) {
 				int x = e.getX(); //ending x-coordinate when release the mouse
-				int y = e.getY(); //endinig y-coordinate when release the mouse
+				int y = e.getY(); //ending y-coordinate when release the mouse
 				_newXmin = _xSet[_startX]; //get corresponding x-coordinate in the array set as a starting domain
 				_newYmin = _ySet[_startY]; //get corresponding y-coordinate in the array set as a starting range
 				_newXmax = _xSet[x]; //get corresponding x-coordinate in the array set as a ending domain
@@ -431,7 +439,7 @@ public class GUI implements Runnable {
 					_image = _multibrot.finalFractal(_newXmin, _newXmax, _newYmin, _newYmax);
 				}
 				_fractalPanel.updateImage(_image); //generate the zoomed-in-fractal image
-				
+				System.out.println(x +"," + y);
 			}
 		});
 		//allows the mouse motion event on fractal
@@ -444,9 +452,28 @@ public class GUI implements Runnable {
 				_g = src.getGraphics(); //get a graphics
 				_g.setColor(Color.BLUE); //set graphics color to blue
 				//draw a rectangle using the current x and y-coordinates when dragging
+				
 				_g.drawRect(_startX, _startY, Math.abs(x-_startX), Math.abs(y-_startY));
 				src.paint(_g); //depicts the rectangle
 			}
 		});
+	}
+	
+	public class WorkerClass {
+		
+		private ComputePool pool;
+		private WorkerResult result;
+		
+		public WorkerClass() {
+			pool = new ComputePool();
+			result = new WorkerResult(0, new int[0][0]);
+		}
+		
+		public FractalPanel doInBackground() throws Exception{
+			
+			return _fractalPanel;
+			
+		}
+		
 	}
 }

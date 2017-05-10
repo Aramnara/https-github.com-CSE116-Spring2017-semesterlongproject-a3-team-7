@@ -19,7 +19,7 @@ public class Multibrot {
 	 * @return a 2d-Array on int.
 	 */
 	public int[][] fractal() {
-		int[][] pixel = new int[512][512];
+		int[][] pixel = new int[2048][2048];
 		return pixel;
 	}
 	
@@ -54,10 +54,10 @@ public class Multibrot {
 	 * @return an array of type double containing all the x-coordinates in the fractal.
 	 */
 	public double[] xCoordinate() {
-		double[] xSet = new double[512];
+		double[] xSet = new double[2048];
 		int rows = 1;
 		xSet[0] = -1.0;
-		for (double x=-1.0+2.0/512; x<1.0; x+=2.0/512) {
+		for (double x=-1.0+2.0/2048; x<1.0; x+=2.0/2048) {
 			xSet[rows] = x;
 			rows = add(rows);
 		}
@@ -72,9 +72,9 @@ public class Multibrot {
 	 * @return an array of type double containing all the x-coordinates in the fractal.
 	 */
 	public double[] xCoordinate(double xMin, double xMax) {
-		double[] xSet = new double[512];
+		double[] xSet = new double[2048];
 		int rows = 0;
-		double increase = (xMax - xMin)/512;
+		double increase = (xMax - xMin)/2048;
 		for (double x=xMin; x<=xMax; x+=increase) {
 			xSet[rows] = x;
 			rows = add(rows);
@@ -90,9 +90,9 @@ public class Multibrot {
 	 * @return an array of type double containing all the y-coordinates in the fractal.
 	 */
 	public double[] yCoordinate(double yMin, double yMax) {
-		double[] ySet = new double[512];
+		double[] ySet = new double[2048];
 		int rows = 0;
-		double increase = (yMax - yMin)/512;
+		double increase = (yMax - yMin)/2048;
 		for (double y=yMin; y<=yMax; y+=increase) {
 			ySet[rows] = y;
 			rows = add(rows);
@@ -114,8 +114,8 @@ public class Multibrot {
 		int[][] pixel = fractal();
 		double[] xSet = xCoordinate(xMin, xMax);
 		double[] ySet = yCoordinate(yMin, yMax);
-		for (int rows=0; rows<512; rows+=1) {
-			for (int cols=0; cols<512; cols+=1) {
+		for (int rows=0; rows<2048; rows+=1) {
+			for (int cols=0; cols<2048; cols+=1) {
 				pixel[rows][cols] = calcEscapeTime(xSet[rows], ySet[cols]);
 			}
 		}
@@ -131,7 +131,7 @@ public class Multibrot {
 	 */
 	public int add(int target) {
 		int add = target;
-		if (add < 511) {
+		if (add < 2047) {
 			add += 1;
 		} else {
 			add = 0;
