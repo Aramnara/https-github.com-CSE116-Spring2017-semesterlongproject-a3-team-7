@@ -27,6 +27,7 @@ import edu.buffalo.fractal.FractalPanel;
 import edu.buffalo.fractal.WorkerResult;
 
 import java.awt.event.MouseMotionAdapter;
+import java.beans.PropertyChangeEvent;
 
 /**
  * This class contains all the method and the GUI that is needed to generate 
@@ -49,6 +50,7 @@ public class GUI implements Runnable{
 	private JMenuItem _fileMenuItem1; //menu item in file menu
 	private JMenuItem _fileMenuItem2; //menu item in file menu
 	private JMenuItem _fileMenuItem3; //menu item in file menu
+	private JMenuItem _fileMenuItem4; //menu item in file menu
 	private JMenuItem _fractalMenuItem1; //menu item in fractal menu
 	private JMenuItem _fractalMenuItem2; //menu item in fractal menu
 	private JMenuItem _fractalMenuItem3; //menu item in fractal menu
@@ -66,6 +68,14 @@ public class GUI implements Runnable{
 	double _newXmax; // the corresponding maximum x-value of the new coordinate in type double
 	double _newYmin; // the corresponding minimum y-value of the new coordinate in type double
 	double _newYmax; // the corresponding maximum y-value of the new coordinate in type double
+	private WorkerClass _workerClass;
+	private int _startingRows=0;
+	private int _endingRows=2048;
+	private ComputePool _pool;
+	private WorkerResult _result;
+	private SwingWorker<WorkerResult, Void>[] _workerArray;
+	private WorkerResult _workerResult[];
+	private int _thread=0;
 	
 	/**
 	 * Composition of all the needed class.
@@ -82,6 +92,8 @@ public class GUI implements Runnable{
 		_newYmin = 0.0;
 		_newXmax = 0.0;
 		_newYmax = 0.0;
+		_workerClass = new WorkerClass();
+		_pool = new ComputePool();
 	}
 	
 	/**
@@ -105,6 +117,8 @@ public class GUI implements Runnable{
 		_fileMenuItem1.setEnabled(true);
 		_fileMenuItem2 = new JMenuItem("Reset zoom");
 		_fileMenuItem2.setEnabled(true);
+		_fileMenuItem4 = new JMenuItem("Change SwingWorker Instances");
+		_fileMenuItem4.setEnabled(true);
 		_fileMenuItem3 = new JMenuItem("Exit");
 		_fileMenuItem3.setEnabled(true);
 		_fractalMenuItem1 = new JMenuItem("Mandelbrot");
@@ -143,14 +157,20 @@ public class GUI implements Runnable{
 		selectedJulia(); //when selecting Julia, generate the fractal, and return true
 		selectedBurningShip(); //when selecting BurningShip, generate the fractal, and return true
 		selectedMultibrot(); //when selecting Multibrot, generate the fractal, and return true
+//		selectedMandelbrot(); //when selecting Mandelbrot, generate the fractal, and return true
+//		selectedJulia(); //when selecting Julia, generate the fractal, and return true
+//		selectedBurningShip(); //when selecting BurningShip, generate the fractal, and return true
+//		selectedMultibrot();//when selecting Multibrot, generate the fractal, and return true
 		reset(); //reset the zoom of the fractal to default
 		maximumEscapeTime(); //when selecting the change escape time menuitem, pops out a window that allows user to enter the escape time
 		Mouse(); //To activate and enable all the event regarding the mouse
-	
+		changeSwingWorkerInstance();
+		
 		//add each menu item into the menu
 		fileMenu.add(_fileMenuItem0);
 		fileMenu.add(_fileMenuItem1);
 		fileMenu.add(_fileMenuItem2);
+		fileMenu.add(_fileMenuItem4);
 		fileMenu.add(_fileMenuItem3);
 		fractalMenu.add(_fractalMenuItem1);
 		fractalMenu.add(_fractalMenuItem2);
@@ -210,7 +230,7 @@ public class GUI implements Runnable{
 				int i = 0;
 				//a loop that restricting only 1 option pane appeared when clicked
 				while (i <= 0) {
-					//option pane allows user to enter escape distance
+					//option pane allows user to enter escape Time
 					String MaximumEscapeTime = JOptionPane.showInputDialog("Please Enter Maximm Escape Time");
 					if (MaximumEscapeTime.length()>0) {
 						int escapeTime = Integer.parseInt(MaximumEscapeTime);
@@ -458,22 +478,122 @@ public class GUI implements Runnable{
 			}
 		});
 	}
+	public void changeSwingWorkerInstance() {
+		_fileMenuItem4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = 0;
+				//a loop that restricting only 1 option pane appeared when clicked
+				while (i <= 0) {
+					//option pane allows user to enter SwingWorker instance
+					String SwingWorker = JOptionPane.showInputDialog("Please Enter Number of SwingWorker Instance");
+					if (SwingWorker.length()>0) {
+						int swingworker = Integer.parseInt(SwingWorker);
+						_workerArray = new WorkerClass[swingworker];
+						_workerResult = new WorkerResult[swingworker];
+						_thread = swingworker;
+						_startingRows = 0;
+						_endingRows = 0;
+						for (int t=0;t<_thread; t+=1) {
+							_startingRows = _endingRows;
+							_endingRows += 2048/_thread;
+							WorkerClass worker = new WorkerClass();
+							_workerResult[t] = worker.doInBackground();
+//							_pool.propertyChange(new PropertyChangeEvent();
+//							worker.execute();
+							_workerArray[t] = worker;
+							if (t == _thread-1) {
+								_endingRows += 2048%_thread;
+							}
+							System.out.println(_startingRows + "," + _endingRows);
+						}
+
+						_pool.generateFractal(2048, _workerArray);
+//						_pool.changePanel(_fractalPanel);
+						//showing the error message when entering an invalid escape distance
+						if (swingworker < 1 || swingworker > 128) {
+							JOptionPane.showMessageDialog(null,"The entered SwingWorker Instance is invalid.","Error" ,JOptionPane.ERROR_MESSAGE);
+						}
+						i += 1;
+					} else {
+						System.out.println("Please enter some number!");
+					}
+				}
+			}
+		});
+	}
 	
-	public class WorkerClass {
+	public class WorkerClass extends SwingWorker<WorkerResult, Void>{
 		
-		private ComputePool pool;
-		private WorkerResult result;
+//		private ComputePool _pool;
+//		private WorkerResult _result;
+//		private SwingWorker<WorkerResult, Void>[] _workerArray;
+//		private WorkerResult _workerResult[];
+//		private int _thread;
 		
 		public WorkerClass() {
-			pool = new ComputePool();
-			result = new WorkerResult(0, new int[0][0]);
+//			_pool = new ComputePool();
+//			_startingRows = startingRows;
+//			_endingRows = endingRows;
+//			_workerArray = new WorkerClass[128];
+//			_workerResult = new WorkerResult[128];
+//			_thread = 0;
+			
 		}
 		
-		public FractalPanel doInBackground() throws Exception{
+		public WorkerResult doInBackground() {
+			_result = new WorkerResult(_startingRows, _mandelbrot.finalFractalForWorkerResult(-2.15, 0.6, -1.3, 1.3, _startingRows, _endingRows));
 			
-			return _fractalPanel;
+			return _result;
 			
 		}
+		
+//		public void changeSwingWorkerInstance() {
+//			_fileMenuItem4.addActionListener(new ActionListener() {
+//				public void actionPerformed(ActionEvent e) {
+//					int i = 0;
+//					//a loop that restricting only 1 option pane appeared when clicked
+//					while (i <= 0) {
+//						//option pane allows user to enter SwingWorker instance
+//						String SwingWorker = JOptionPane.showInputDialog("Please Enter Number of SwingWorker Instance");
+//						if (SwingWorker.length()>0) {
+//							int swingworker = Integer.parseInt(SwingWorker);
+//							_workerArray = new WorkerClass[swingworker];
+//							_workerResult = new WorkerResult[swingworker];
+//							_thread = swingworker;
+//							_startingRows = 0;
+//							_endingRows = (2048/_thread)-1;
+//							int startingRows;
+//							int endingRows;
+//							for (int t=0;t<_thread; t+=1) {
+//								WorkerClass worker = new WorkerClass();
+//								_workerResult[t] = worker.doInBackground();
+////								_pool.propertyChange(new PropertyChangeEvent();
+////								worker.execute();
+//								_workerArray[t] = worker;
+//								_startingRows += (2048/_thread);
+//								_endingRows += 2048/_thread;
+//								if (t == _thread-2) {
+//									_endingRows += 2048%_thread;
+//								}
+//								System.out.println(_startingRows + "," + _endingRows);
+//							}
+//
+//							_pool.generateFractal(2048, _workerArray);
+////							_pool.changePanel(_fractalPanel);
+//							//showing the error message when entering an invalid escape distance
+//							if (swingworker < 1 || swingworker > 128) {
+//								JOptionPane.showMessageDialog(null,"The entered escape time is invalid.","Error" ,JOptionPane.ERROR_MESSAGE);
+//							}
+//							i += 1;
+//						} else {
+//							System.out.println("Please enter some number!");
+//						}
+//					}
+//				}
+//			});
+//		}
+	
 		
 	}
+	
 }

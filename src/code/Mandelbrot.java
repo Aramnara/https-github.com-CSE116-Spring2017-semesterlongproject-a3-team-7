@@ -106,6 +106,18 @@ public class Mandelbrot {
 		return pixel;
 	}
 	
+	public int[][] finalFractalForWorkerResult(double xMin, double xMax, double yMin, double yMax, int rowStart, int rowEnd) {
+		int[][] pixel = fractal();
+		double[] xSet = xCoordinate(xMin, xMax);
+		double[] ySet = yCoordinate(yMin, yMax);
+		for (int rows=rowStart; rows<rowEnd; rows+=1) {
+			for (int cols=0; cols<2048; cols+=1) {
+				pixel[rows][cols] = calcEscapeTime(xSet[rows], ySet[cols]);
+			}
+		}
+		return pixel;
+	}
+	
 	/**
 	 * This method allows to increase the current integer by 1
 	 * without exceeding the range for the fractals.
