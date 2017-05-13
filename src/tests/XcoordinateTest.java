@@ -29,9 +29,9 @@ public class XcoordinateTest {
 		Mandelbrot mandelbrot = new Mandelbrot();
 		double[] xTest = mandelbrot.xCoordinate(-2.15, 0.6);
 		assertEquals(-2.15, xTest[0], 0.01);
-		assertEquals(-2.139, xTest[2], 0.01);
-		assertEquals(-1.613, xTest[100], 0.01);
-		assertEquals(0.6, xTest[511], 0.01);
+		assertEquals(-2.147, xTest[2], 0.01);
+		assertEquals(-2.016, xTest[100], 0.01);
+		assertEquals(-1.464, xTest[511], 0.01);
 	}
 	
 	/**
@@ -43,10 +43,10 @@ public class XcoordinateTest {
 	public void JuliaSetTest() {
 		Julia julia = new Julia();
 		double[] xTest = julia.xCoordinate(-1.7, 1.7);
-		assertEquals(-1.65, xTest[7], 0.01);
-		assertEquals(.298, xTest[301], 0.01);
-		assertEquals(.969, xTest[402], 0.01);
-		assertEquals(1.62, xTest[500], 0.01);
+		assertEquals(-1.688, xTest[7], 0.01);
+		assertEquals(-1.200, xTest[301], 0.01);
+		assertEquals(-1.033, xTest[402], 0.01);
+		assertEquals(-0.870, xTest[500], 0.01);
 	}
 	
 	/**
@@ -58,10 +58,10 @@ public class XcoordinateTest {
 	public void BurningShipSetTest() {
 		BurningShip burningship = new BurningShip();
 		double[] xTest = burningship.xCoordinate(-1.8, -1.7);
-		assertEquals(-1.8, xTest[0], 0.01);
-		assertEquals(-1.79, xTest[68], 0.01);
-		assertEquals(-1.75, xTest[265], 0.01);
-		assertEquals(-1.7, xTest[511], 0.01);
+		assertEquals(-1.80, xTest[68], 0.01);
+		assertEquals(-1.787, xTest[265], 0.01);
+		assertEquals(-1.775, xTest[511], 0.01);
+		assertEquals(-1.702, xTest[2000], 0.01);
 	}
 	
 	/**
@@ -74,8 +74,8 @@ public class XcoordinateTest {
 		Multibrot multibrot = new Multibrot();
 		double[] xTest = multibrot.xCoordinate();
 		assertEquals(-1, xTest[0], 0.01);
-		assertEquals(-0.98, xTest[4], 0.01);
-		assertEquals(0.06, xTest[272], 0.01);
-		assertEquals(1.0, xTest[511], 0.01);
+		assertEquals(-0.996, xTest[4], 0.01);
+		assertEquals(-0.734, xTest[272], 0.01);
+		assertEquals(-0.501, xTest[511], 0.01);
 	}
 }

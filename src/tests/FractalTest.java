@@ -21,11 +21,11 @@ public class FractalTest {
 	
 	/**
 	 * This JUnit test method testing all four fractals
-	 * expecting to return a 2d-array with 512 rows and 512 columns.
+	 * expecting to return a 2d-array with 2048 rows and 2048 columns.
 	 */
 	@Test
 	public void Test1() {
-		int[][] testArray = new int[512][512];
+		int[][] testArray = new int[2048][2048];
 		
 		Mandelbrot mandelbrot = new Mandelbrot();
 		assertEquals(testArray.length, mandelbrot.finalFractal(-2.16, 0.6, -1.3, 1.3).length, 0.001);

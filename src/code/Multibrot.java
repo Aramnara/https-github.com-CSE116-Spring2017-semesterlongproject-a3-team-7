@@ -5,6 +5,7 @@ package code;
  * which would return a 2d-Array fractal.
  *   
  * @author Jae Hoon Oh
+ * @author Zhenduo Lin
  */
 public class Multibrot {
 	
@@ -13,7 +14,7 @@ public class Multibrot {
 	
 	/** 
 	 * This method returns a 2d-Array of type int
-	 *  with 512 rows and 512 columns
+	 *  with 2048 rows and 2048 columns
 	 *  which would be the fractal that we will be working on.
 	 * 
 	 * @return a 2d-Array on int.
@@ -117,6 +118,31 @@ public class Multibrot {
 		for (int rows=0; rows<2048; rows+=1) {
 			for (int cols=0; cols<2048; cols+=1) {
 				pixel[rows][cols] = calcEscapeTime(xSet[rows], ySet[cols]);
+			}
+		}
+		return pixel;
+	}
+	
+	/**
+	 * This method depicts the specified 2d-array of the fractal
+	 * of each SwingWorker to generate
+	 * within certain range and filled with escape time.
+	 * 
+	 * @param xMin = starting x-coordinate, minimum x-coordinate
+	 * @param xMax = ending x-coordinate, maximum x-coordinate
+	 * @param yMin = starting y-coordinate, minimum y-coordinate
+	 * @param yMax = ending y-coordinate, maximum y-coordinate
+	 * @param rowStart = starting row of one SwingWorker
+	 * @param rowEnd = ending row of one SwingWorker
+	 * @return a 2d-array of fractal.
+	 */
+	public int[][] finalFractalForWorkerResult(double xMin, double xMax, double yMin, double yMax, int rowStart, int rowEnd) {
+		int[][] pixel = new int[rowEnd-rowStart][2048];
+		double[] xSet = xCoordinate(xMin, xMax);
+		double[] ySet = yCoordinate(yMin, yMax);
+		for (int rows=0; rows<rowEnd-rowStart; rows+=1) {
+			for (int cols=0; cols<2048; cols+=1) {
+				pixel[rows][cols] = calcEscapeTime(xSet[rows+rowStart], ySet[cols]);
 			}
 		}
 		return pixel;

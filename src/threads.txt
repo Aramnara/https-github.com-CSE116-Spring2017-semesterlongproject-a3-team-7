@@ -1,0 +1,17 @@
+To change the number of threads used to generate the fractal:
+
+	1. Run the Driver in the code package
+	2. Open "File" menu bar
+	3. Select "Change SwingWorker Instances"
+	4. Then a window would pop out that allows user to enter the number of threads.
+	
+	
+and the classes & methods that verify the code uses this number of threads:
+
+	1. Open "GUI.java" in the code package
+	2. Scroll down to the subclass "WorkerClass"
+	3. the methods 
+
+		public boolean changeSwingWorkerInstance()
+		
+	   shows the code uses the number of thread that user entered

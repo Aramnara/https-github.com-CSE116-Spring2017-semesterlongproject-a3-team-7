@@ -1,0 +1,11 @@
+To verify that the program generates a 2048 x 2048 pixel fractal:
+
+	1.Open Mandelbrot, Julia, BurningShip, and Multibrot class 
+	2.the 
+			public int fractal()
+			
+			public int[][] finalFractalForWorkerResult
+			
+			public int[][] finalFractal
+			
+	  methods illustrate that the program would generate 2048 * 2048 pixel fractal.
